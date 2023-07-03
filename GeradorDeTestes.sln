@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeradorDeTestes.WinForms", "GeradorDeTestes.WinForms\GeradorDeTestes.WinForms.csproj", "{3DEFE66C-4BF1-406A-BA47-C068428B5037}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentação", "1 - Apresentação", "{1D51C888-E831-402D-98C9-001DB8A2B88F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domínio", "2 - Domínio", "{7CF32A4E-9F4B-41FE-A527-A02BDB24B2A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{61207904-F139-4785-AD6F-46013A5BFAB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeradorDeTestes.Dominio", "GeradorDeTestes.Dominio\GeradorDeTestes.Dominio.csproj", "{CDAB1209-A3A9-4352-BED1-AC50428D0BF3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeradorDeTestes.Infra.Dados.Sql", "GeradorDeTestes.Infra.Dados.Sql\GeradorDeTestes.Infra.Dados.Sql.csproj", "{F6100FAE-64BB-4F64-9C74-3C3E6DC6253D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DEFE66C-4BF1-406A-BA47-C068428B5037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DEFE66C-4BF1-406A-BA47-C068428B5037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DEFE66C-4BF1-406A-BA47-C068428B5037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DEFE66C-4BF1-406A-BA47-C068428B5037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDAB1209-A3A9-4352-BED1-AC50428D0BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDAB1209-A3A9-4352-BED1-AC50428D0BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDAB1209-A3A9-4352-BED1-AC50428D0BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDAB1209-A3A9-4352-BED1-AC50428D0BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6100FAE-64BB-4F64-9C74-3C3E6DC6253D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6100FAE-64BB-4F64-9C74-3C3E6DC6253D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6100FAE-64BB-4F64-9C74-3C3E6DC6253D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6100FAE-64BB-4F64-9C74-3C3E6DC6253D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3DEFE66C-4BF1-406A-BA47-C068428B5037} = {1D51C888-E831-402D-98C9-001DB8A2B88F}
+		{CDAB1209-A3A9-4352-BED1-AC50428D0BF3} = {7CF32A4E-9F4B-41FE-A527-A02BDB24B2A1}
+		{F6100FAE-64BB-4F64-9C74-3C3E6DC6253D} = {61207904-F139-4785-AD6F-46013A5BFAB8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30B42263-A907-46E2-A738-C46B8898102C}
+	EndGlobalSection
+EndGlobal
