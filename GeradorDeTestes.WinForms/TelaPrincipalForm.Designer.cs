@@ -44,9 +44,9 @@
             btnDuplicar = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             btnVisualizar = new ToolStripButton();
-            toolStripSeparator4 = new ToolStripSeparator();
-            btnSalvar = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
+            btnSalvar = new ToolStripButton();
+            toolStripSeparator4 = new ToolStripSeparator();
             lblTipoCadastro = new ToolStripLabel();
             panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
@@ -65,66 +65,60 @@
             menuBar.Location = new Point(0, 0);
             menuBar.Name = "menuBar";
             menuBar.Padding = new Padding(4, 1, 0, 1);
-            menuBar.Size = new Size(597, 30);
+            menuBar.Size = new Size(597, 34);
             menuBar.TabIndex = 0;
             menuBar.Text = "menuStrip1";
             // 
             // cadastroMenu
             // 
             cadastroMenu.DropDownItems.AddRange(new ToolStripItem[] { materiaToolStripMenuItem, questoesMenuItem, testesMenuItem });
-            cadastroMenu.Image = Properties.Resources.list;
-            cadastroMenu.ImageScaling = ToolStripItemImageScaling.None;
+            cadastroMenu.Image = (Image)resources.GetObject("cadastroMenu.Image");
             cadastroMenu.Name = "cadastroMenu";
-            cadastroMenu.Size = new Size(95, 28);
+            cadastroMenu.Size = new Size(99, 32);
             cadastroMenu.Text = "Cadastros";
             // 
             // materiaToolStripMenuItem
             // 
             materiaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { materiaMenuItem, disciplinaMenuItem });
-            materiaToolStripMenuItem.Image = Properties.Resources.books;
             materiaToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
-            materiaToolStripMenuItem.Size = new Size(180, 22);
+            materiaToolStripMenuItem.Size = new Size(123, 22);
             materiaToolStripMenuItem.Text = "Matéria";
             // 
             // materiaMenuItem
             // 
-            materiaMenuItem.Image = Properties.Resources.study__1_;
             materiaMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             materiaMenuItem.Name = "materiaMenuItem";
-            materiaMenuItem.Size = new Size(180, 22);
+            materiaMenuItem.Size = new Size(125, 22);
             materiaMenuItem.Text = "Matéria";
             // 
             // disciplinaMenuItem
             // 
-            disciplinaMenuItem.Image = Properties.Resources.graduation_hat__2_;
             disciplinaMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             disciplinaMenuItem.Name = "disciplinaMenuItem";
-            disciplinaMenuItem.Size = new Size(180, 22);
+            disciplinaMenuItem.Size = new Size(125, 22);
             disciplinaMenuItem.Text = "Disciplina";
             // 
             // questoesMenuItem
             // 
-            questoesMenuItem.Image = Properties.Resources.pencil;
             questoesMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             questoesMenuItem.Name = "questoesMenuItem";
-            questoesMenuItem.Size = new Size(180, 22);
+            questoesMenuItem.Size = new Size(123, 22);
             questoesMenuItem.Text = "Questões";
             // 
             // testesMenuItem
             // 
-            testesMenuItem.Image = Properties.Resources.maths;
             testesMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             testesMenuItem.Name = "testesMenuItem";
-            testesMenuItem.Size = new Size(180, 22);
+            testesMenuItem.Size = new Size(123, 22);
             testesMenuItem.Text = "Testes";
             // 
             // toolStrip1
             // 
             toolStrip1.BackColor = Color.White;
             toolStrip1.ImageScalingSize = new Size(28, 28);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator1, btnDuplicar, toolStripSeparator3, btnVisualizar, toolStripSeparator4, btnSalvar, toolStripSeparator2, lblTipoCadastro });
-            toolStrip1.Location = new Point(0, 30);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator1, btnDuplicar, toolStripSeparator3, btnVisualizar, toolStripSeparator2, btnSalvar, toolStripSeparator4, lblTipoCadastro });
+            toolStrip1.Location = new Point(0, 34);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(597, 49);
             toolStrip1.TabIndex = 1;
@@ -133,8 +127,8 @@
             // btnInserir
             // 
             btnInserir.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnInserir.Image = Properties.Resources._1486485588_add_create_new_math_sign_cross_plus_81186;
-            btnInserir.ImageTransparentColor = Color.Magenta;
+            btnInserir.Image = (Image)resources.GetObject("btnInserir.Image");
+            btnInserir.ImageTransparentColor = Color.Transparent;
             btnInserir.Name = "btnInserir";
             btnInserir.Padding = new Padding(7);
             btnInserir.Size = new Size(46, 46);
@@ -143,8 +137,8 @@
             // btnEditar
             // 
             btnEditar.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnEditar.Image = Properties.Resources._1486504369_change_edit_options_pencil_settings_tools_write_81307;
-            btnEditar.ImageTransparentColor = Color.Magenta;
+            btnEditar.Image = (Image)resources.GetObject("btnEditar.Image");
+            btnEditar.ImageTransparentColor = Color.Transparent;
             btnEditar.Name = "btnEditar";
             btnEditar.Padding = new Padding(7);
             btnEditar.Size = new Size(46, 46);
@@ -153,8 +147,8 @@
             // btnExcluir
             // 
             btnExcluir.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnExcluir.Image = Properties.Resources._1486504346_cancel_close_delete_exit_remove_x_81304;
-            btnExcluir.ImageTransparentColor = Color.Magenta;
+            btnExcluir.Image = (Image)resources.GetObject("btnExcluir.Image");
+            btnExcluir.ImageTransparentColor = Color.Transparent;
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Padding = new Padding(7);
             btnExcluir.Size = new Size(46, 46);
@@ -170,7 +164,7 @@
             // 
             btnDuplicar.DisplayStyle = ToolStripItemDisplayStyle.Image;
             btnDuplicar.Image = (Image)resources.GetObject("btnDuplicar.Image");
-            btnDuplicar.ImageTransparentColor = Color.Magenta;
+            btnDuplicar.ImageTransparentColor = Color.Transparent;
             btnDuplicar.Name = "btnDuplicar";
             btnDuplicar.Padding = new Padding(7);
             btnDuplicar.Size = new Size(46, 46);
@@ -185,34 +179,34 @@
             // btnVisualizar
             // 
             btnVisualizar.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnVisualizar.Image = Properties.Resources._1486503764_browser_interface_ui_design_layout_website_81271;
-            btnVisualizar.ImageTransparentColor = Color.Magenta;
+            btnVisualizar.Image = (Image)resources.GetObject("btnVisualizar.Image");
+            btnVisualizar.ImageTransparentColor = Color.Transparent;
             btnVisualizar.Name = "btnVisualizar";
             btnVisualizar.Padding = new Padding(7);
             btnVisualizar.Size = new Size(46, 46);
             btnVisualizar.Text = "toolStripButton4";
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Padding = new Padding(7);
-            toolStripSeparator4.Size = new Size(6, 49);
-            // 
-            // btnSalvar
-            // 
-            btnSalvar.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnSalvar.Image = Properties.Resources._1486503760_backup_disk_data_data_storage_floppy_save_81268;
-            btnSalvar.ImageTransparentColor = Color.Magenta;
-            btnSalvar.Name = "btnSalvar";
-            btnSalvar.Padding = new Padding(7);
-            btnSalvar.Size = new Size(46, 46);
-            btnSalvar.Text = "toolStripButton4";
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Padding = new Padding(7);
             toolStripSeparator2.Size = new Size(6, 49);
+            // 
+            // btnSalvar
+            // 
+            btnSalvar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnSalvar.Image = (Image)resources.GetObject("btnSalvar.Image");
+            btnSalvar.ImageTransparentColor = Color.Transparent;
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Padding = new Padding(7);
+            btnSalvar.Size = new Size(46, 46);
+            btnSalvar.Text = "toolStripButton4";
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Padding = new Padding(7);
+            toolStripSeparator4.Size = new Size(6, 49);
             // 
             // lblTipoCadastro
             // 
@@ -225,17 +219,17 @@
             panelRegistros.BackColor = Color.Transparent;
             panelRegistros.Controls.Add(statusStrip1);
             panelRegistros.Dock = DockStyle.Fill;
-            panelRegistros.Location = new Point(0, 79);
+            panelRegistros.Location = new Point(0, 83);
             panelRegistros.Margin = new Padding(2);
             panelRegistros.Name = "panelRegistros";
-            panelRegistros.Size = new Size(597, 286);
+            panelRegistros.Size = new Size(597, 282);
             panelRegistros.TabIndex = 2;
             // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(28, 28);
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip1.Location = new Point(0, 264);
+            statusStrip1.Location = new Point(0, 260);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new Padding(1, 0, 8, 0);
             statusStrip1.Size = new Size(597, 22);
