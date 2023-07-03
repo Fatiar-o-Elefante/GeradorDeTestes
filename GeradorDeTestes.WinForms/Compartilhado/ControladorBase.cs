@@ -24,6 +24,8 @@ namespace GeradorDeTestes.WinForms.Compartilhado
 
         public virtual bool VisualizarHabilitado { get { return true; } }
 
+        public virtual void ApresentarMensagem(string mensagem, string titulo) { }
+
         public abstract void Inserir();
 
         public abstract void Editar();
@@ -34,8 +36,6 @@ namespace GeradorDeTestes.WinForms.Compartilhado
         {
 
         }
-
-        public abstract void ApresentarMensagem(string mensagem, string titulo);
 
         public abstract UserControl ObterListagem();
 

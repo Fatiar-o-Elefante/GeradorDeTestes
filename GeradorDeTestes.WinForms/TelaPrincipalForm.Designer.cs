@@ -36,7 +36,7 @@
             disciplinaMenuItem = new ToolStripMenuItem();
             questoesMenuItem = new ToolStripMenuItem();
             testesMenuItem = new ToolStripMenuItem();
-            toolStrip1 = new ToolStrip();
+            barraFerramentas = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
             btnExcluir = new ToolStripButton();
@@ -52,14 +52,14 @@
             statusStrip1 = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
             menuBar.SuspendLayout();
-            toolStrip1.SuspendLayout();
+            barraFerramentas.SuspendLayout();
             panelRegistros.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuBar
             // 
-            menuBar.BackColor = Color.DarkSeaGreen;
+            menuBar.BackColor = Color.LightSteelBlue;
             menuBar.ImageScalingSize = new Size(28, 28);
             menuBar.Items.AddRange(new ToolStripItem[] { cadastroMenu });
             menuBar.Location = new Point(0, 0);
@@ -113,16 +113,16 @@
             testesMenuItem.Size = new Size(123, 22);
             testesMenuItem.Text = "Testes";
             // 
-            // toolStrip1
+            // barraFerramentas
             // 
-            toolStrip1.BackColor = Color.White;
-            toolStrip1.ImageScalingSize = new Size(28, 28);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator1, btnDuplicar, toolStripSeparator3, btnVisualizar, toolStripSeparator2, btnSalvar, toolStripSeparator4, lblTipoCadastro });
-            toolStrip1.Location = new Point(0, 34);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(597, 49);
-            toolStrip1.TabIndex = 1;
-            toolStrip1.Text = "toolStrip1";
+            barraFerramentas.BackColor = Color.White;
+            barraFerramentas.ImageScalingSize = new Size(28, 28);
+            barraFerramentas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator1, btnDuplicar, toolStripSeparator3, btnVisualizar, toolStripSeparator2, btnSalvar, toolStripSeparator4, lblTipoCadastro });
+            barraFerramentas.Location = new Point(0, 34);
+            barraFerramentas.Name = "barraFerramentas";
+            barraFerramentas.Size = new Size(597, 49);
+            barraFerramentas.TabIndex = 1;
+            barraFerramentas.Text = "toolStrip1";
             // 
             // btnInserir
             // 
@@ -248,7 +248,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(597, 365);
             Controls.Add(panelRegistros);
-            Controls.Add(toolStrip1);
+            Controls.Add(barraFerramentas);
             Controls.Add(menuBar);
             MainMenuStrip = menuBar;
             Margin = new Padding(2);
@@ -257,8 +257,8 @@
             Text = "Gerador de Testes";
             menuBar.ResumeLayout(false);
             menuBar.PerformLayout();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            barraFerramentas.ResumeLayout(false);
+            barraFerramentas.PerformLayout();
             panelRegistros.ResumeLayout(false);
             panelRegistros.PerformLayout();
             statusStrip1.ResumeLayout(false);
@@ -276,7 +276,7 @@
         private ToolStripMenuItem disciplinaMenuItem;
         private ToolStripMenuItem questoesMenuItem;
         private ToolStripMenuItem testesMenuItem;
-        private ToolStrip toolStrip1;
+        private ToolStrip barraFerramentas;
         private ToolStripButton btnInserir;
         private ToolStripButton btnEditar;
         private ToolStripButton btnExcluir;

@@ -33,7 +33,7 @@
             btnGravar = new Button();
             btnCancelar = new Button();
             label2 = new Label();
-            textBox1 = new TextBox();
+            txtNome = new TextBox();
             label3 = new Label();
             cbDisciplina = new ComboBox();
             label4 = new Label();
@@ -91,12 +91,12 @@
             label2.TabIndex = 9;
             label2.Text = "Nome";
             // 
-            // textBox1
+            // txtNome
             // 
-            textBox1.Location = new Point(86, 54);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(276, 23);
-            textBox1.TabIndex = 10;
+            txtNome.Location = new Point(86, 54);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(276, 23);
+            txtNome.TabIndex = 10;
             // 
             // label3
             // 
@@ -156,7 +156,7 @@
             Controls.Add(label4);
             Controls.Add(cbDisciplina);
             Controls.Add(label3);
-            Controls.Add(textBox1);
+            Controls.Add(txtNome);
             Controls.Add(label2);
             Controls.Add(txtId);
             Controls.Add(label1);
@@ -175,7 +175,7 @@
         private Button btnGravar;
         private Button btnCancelar;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox txtNome;
         private Label label3;
         private ComboBox cbDisciplina;
         private Label label4;

@@ -19,12 +19,23 @@ namespace GeradorDeTestes.Dominio.ModuloMateria
 
         public override void AtualizarInformacoes(Materia registroAtualizado)
         {
-            throw new NotImplementedException();
+            this.id += registroAtualizado.id;
+            this.Nome = registroAtualizado.Nome;
+            this.Disciplina = registroAtualizado.Disciplina;
+            this.Serie = registroAtualizado.Serie;
         }
 
         public override string[] Validar()
         {
-            throw new NotImplementedException();
+            List<string> erros = new List<string>();
+
+            if (string.IsNullOrEmpty(Nome))
+                erros.Add("O campo 'Nome' é obrigatório");
+
+            if (Nome.Length < 3)
+                erros.Add("O campo 'Nome' deve conter no mínimo 3 caracteres");
+
+            return erros.ToArray();
         }
     }
 }
