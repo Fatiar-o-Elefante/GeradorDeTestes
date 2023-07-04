@@ -138,7 +138,7 @@
             // rdbSegundo
             // 
             rdbSegundo.AutoSize = true;
-            rdbSegundo.Location = new Point(152, 121);
+            rdbSegundo.Location = new Point(128, 121);
             rdbSegundo.Name = "rdbSegundo";
             rdbSegundo.Size = new Size(36, 19);
             rdbSegundo.TabIndex = 15;
