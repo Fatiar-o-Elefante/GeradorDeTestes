@@ -32,11 +32,11 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             grid.Columns.AddRange(colunas);
         }
-        public void AtualizarRegistros(List<Questoes> listaQuestoes)
+        public void AtualizarRegistros(List<Questao> listaQuestoes)
         {
             grid.Rows.Clear();
 
-            foreach (Questoes questao in listaQuestoes)
+            foreach (Questao questao in listaQuestoes)
             {
                 grid.Rows.Add(questao.id, questao.Enunciado, questao.Materia.Nome);
             }

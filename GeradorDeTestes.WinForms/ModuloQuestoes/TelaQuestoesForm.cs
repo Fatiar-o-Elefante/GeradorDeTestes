@@ -10,7 +10,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             InitializeComponent();
         }
 
-        public Questoes ObterQuestao()
+        public Questao ObterQuestao()
         {
             int id = Convert.ToInt32(txtId.Text);
 
@@ -24,7 +24,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             listaAlaternativas.AddRange(chListAlternativas.Items.Cast<Alternativa>());
 
-            Questoes questao = new Questoes(materia, enunciado, respostaCerta, listaAlaternativas);
+            Questao questao = new Questao(materia, enunciado, respostaCerta, listaAlaternativas);
 
             if (id > 0)
                 questao.id = id;
@@ -32,7 +32,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             return questao;
         }
 
-        public void ConfigurarTela(Questoes questao)
+        public void ConfigurarTela(Questao questao)
         {
             ConfigurarListBoxAlternativa(questao.ListAlternativas);
 

@@ -3,14 +3,14 @@ using GeradorDeTestes.Dominio.ModuloMateria;
 
 namespace GeradorDeTestes.Dominio.ModuloQuestoes
 {
-    public class Questoes : EntidadeBase<Questoes>
+    public class Questao : EntidadeBase<Questao>
     {
         public Materia Materia { get; set; }
         public string Enunciado { get; set; }
         public string RespostaCerta { get; set; }
         public List<Alternativa> ListAlternativas { get; set; }
 
-        public Questoes(Materia materia, string enunciado, string respostaCerta, List<Alternativa> listAlternativas)
+        public Questao(Materia materia, string enunciado, string respostaCerta, List<Alternativa> listAlternativas)
         {
             Materia = materia;
             Enunciado = enunciado;
@@ -18,7 +18,7 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
             ListAlternativas = listAlternativas;
         }
 
-        public override void AtualizarInformacoes(Questoes registroAtualizado)
+        public override void AtualizarInformacoes(Questao registroAtualizado)
         {
             Materia = registroAtualizado.Materia;
             Enunciado = registroAtualizado.Enunciado;
@@ -29,16 +29,6 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
         public override string[] Validar()
         {
             throw new NotImplementedException();
-        }
-    }
-    public class Alternativa
-    {
-        public string AlternativaResposta { get; set; }
-        public bool Verdadeiro { get; set; }
-
-        public override string ToString()
-        {
-            return AlternativaResposta;
         }
     }
 }

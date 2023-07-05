@@ -23,7 +23,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Questoes questao = telaQuestoes.ObterQuestao();
+                Questao questao = telaQuestoes.ObterQuestao();
 
                 repositorioQuestoes.Inserir(questao);
             }
@@ -33,7 +33,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         public override void Editar()
         {
-            Questoes questaoSelecionada = ObterQuestaoSelecionada();
+            Questao questaoSelecionada = ObterQuestaoSelecionada();
 
             if (questaoSelecionada == null)
             {
@@ -51,7 +51,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Questoes questao = telaQuestao.ObterQuestao();
+                Questao questao = telaQuestao.ObterQuestao();
 
                 repositorioQuestoes.Editar(questao.id, questao);
             }
@@ -61,7 +61,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         public override void Excluir()
         {
-            Questoes questao = ObterQuestaoSelecionada();
+            Questao questao = ObterQuestaoSelecionada();
 
             if (questao == null)
             {
@@ -83,7 +83,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             CarregarQuestoes();
         }
 
-        private Questoes ObterQuestaoSelecionada()
+        private Questao ObterQuestaoSelecionada()
         {
             int id = tabelaQuestoes.ObterIdSelecionado();
 
@@ -93,7 +93,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         private void CarregarQuestoes()
         {
-            List<Questoes> listaQuestoes = repositorioQuestoes.SelecionarTodos();
+            List<Questao> listaQuestoes = repositorioQuestoes.SelecionarTodos();
 
             tabelaQuestoes.AtualizarRegistros(listaQuestoes);
         }

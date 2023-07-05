@@ -12,9 +12,9 @@ namespace GeradorDeTestes.Dominio.ModuloTestes
         public Materia Materia { get; set; }
         public int QuantidadeQuestoes { get; set; }
         public bool ProvaRecuperacao { get; set; }
-        public List<Questoes> ListQuestoes { get; set; }
+        public List<Questao> ListQuestoes { get; set; }
 
-        public Teste(string titulo, Disciplina disciplina, Materia materia, int quantidadeQuestoes, bool provaRecuperacao, List<Questoes> listQuestoes)
+        public Teste(string titulo, Disciplina disciplina, Materia materia, int quantidadeQuestoes, bool provaRecuperacao, List<Questao> listQuestoes)
         {
             Titulo = titulo;
             Disciplina = disciplina;

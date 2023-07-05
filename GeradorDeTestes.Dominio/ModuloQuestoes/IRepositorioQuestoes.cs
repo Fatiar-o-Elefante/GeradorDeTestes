@@ -2,7 +2,7 @@
 
 namespace GeradorDeTestes.Dominio.ModuloQuestoes
 {
-    public interface IRepositorioQuestoes : IRepositorioBase<Questoes>
+    public interface IRepositorioQuestoes : IRepositorioBase<Questao>
     {
     }
 }
