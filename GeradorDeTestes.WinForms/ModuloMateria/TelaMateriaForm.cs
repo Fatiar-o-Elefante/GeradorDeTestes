@@ -15,53 +15,52 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
 {
     public partial class TelaMateriaForm : Form
     {
-        private Materia materia;
-        List<Materia> listaMaterias;
-        public TelaMateriaForm(List<Materia> listaMaterias)
+        public TelaMateriaForm(List<Disciplina> disciplinas)
         {
             InitializeComponent();
 
-            this.listaMaterias = listaMaterias;
+            CarregarDisciplinas(disciplinas);
+        }
 
-            this.ConfigurarDialog();
+        private void CarregarDisciplinas(List<Disciplina> disciplinas)
+        {
+            cbDisciplina.Items.Clear();
+
+            foreach (Disciplina disciplina in disciplinas)
+            {
+                cbDisciplina.Items.Add(disciplina);
+            }
         }
 
         public Materia ObterMateria()
         {
             int id = Convert.ToInt32(txtId.Text);
             string nome = txtNome.Text;
-            SerieEnum serie = (SerieEnum)SelecionarSerie();
             Disciplina disciplina = (Disciplina)cbDisciplina.SelectedItem;
+            int serie = 0;
 
-            materia = new Materia(id, nome, disciplina, serie);
+            if (rdbPrimeiro.Checked)
+            {
+                serie = 1;
+            }
+            if (rdbSegundo.Checked)
+            {
+                serie = 2;
+            }
 
-            return materia;
+            return new Materia(id, nome, disciplina, serie);
         }
 
         public void ConfigurarTela(Materia materiaSelecionada)
         {
             txtId.Text = materiaSelecionada.id.ToString();
             txtNome.Text = materiaSelecionada.Nome;
-            cbDisciplina.Text = materiaSelecionada.Disciplina.ToString();
+            cbDisciplina.SelectedItem = materiaSelecionada.Disciplina;
 
-            switch (materiaSelecionada.Serie)
-            {
-                case SerieEnum.primeira: rdbPrimeiro.Checked = true; break;
-                case SerieEnum.segunda: rdbSegundo.Checked = true; break;
-            }
-        }
-
-        private Enum SelecionarSerie()
-        {
-            SerieEnum serie;
-
-            if (rdbPrimeiro.Checked)
-            {
-                serie = SerieEnum.primeira;
-                return serie;
-            }
-
-            return serie = SerieEnum.segunda;
+            if (materiaSelecionada.Serie == 1)
+                rdbPrimeiro.Checked = true;
+            if (materiaSelecionada.Serie == 2)
+                rdbSegundo.Checked = true;
         }
     }
 }

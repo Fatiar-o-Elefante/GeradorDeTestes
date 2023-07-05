@@ -1,83 +1,71 @@
-﻿using GeradorDeTestes.Dominio.ModuloQuestoes;
+﻿using GeradorDeTestes.Dominio.ModuloMateria;
+using GeradorDeTestes.Dominio.ModuloQuestoes;
 using GeradorDeTestes.WinForms.Compartilhado;
 
 namespace GeradorDeTestes.WinForms.ModuloQuestoes
 {
-    public class ControladorQuestoes : ControladorBase
+    public class ControladorQuestao : ControladorBase
     {
-        TabelaQuestoesControl tabelaQuestoes;
-        private IRepositorioQuestoes repositorioQuestoes;
+        private IRepositorioQuestoes repositorioQuestao;
+        private TabelaQuestoesControl tabelaQuestao;
+        private IRepositorioMateria repositorioMateria;
 
-        public override string ToolTipInserir => throw new NotImplementedException();
+        public ControladorQuestao(IRepositorioQuestoes repositorioQuestao, IRepositorioMateria repositorioMateria)
+        {
+            this.repositorioQuestao = repositorioQuestao;
+            this.repositorioMateria = repositorioMateria;
+        }
 
-        public override string ToolTipEditar => throw new NotImplementedException();
+        public override string ToolTipInserir => "Enserir Nova Questão";
 
-        public override string ToolTipExcluir => throw new NotImplementedException();
+        public override string ToolTipEditar => "Editar Questão Existente";
+
+        public override string ToolTipExcluir => "Excluir Questão";
+
+        public override void ApresentarMensagem(string mensagem, string titulo)
+        {
+            MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
 
 
         public override void Inserir()
         {
-            TelaQuestoesForm telaQuestoes = new TelaQuestoesForm();
+            TelaQuestoesForm telaQuestaoForm = new TelaQuestoesForm(repositorioMateria.SelecionarTodos());
 
-            DialogResult opcaoEscolhida = telaQuestoes.ShowDialog();
+            DialogResult opcaoEscolhida = telaQuestaoForm.ShowDialog();
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Questao questao = telaQuestoes.ObterQuestao();
+                Questao questao = telaQuestaoForm.ObterQuestao();
 
-                repositorioQuestoes.Inserir(questao);
+                List<Alternativa> alternativasAdicionadas = telaQuestaoForm.ObterAlternativasMarcadas();
+
+                repositorioQuestao.Inserir(questao, alternativasAdicionadas);
             }
+
             CarregarQuestoes();
         }
 
 
         public override void Editar()
         {
+            TelaQuestoesForm telaQuestaoForm = new TelaQuestoesForm(repositorioMateria.SelecionarTodos());
+
             Questao questaoSelecionada = ObterQuestaoSelecionada();
 
-            if (questaoSelecionada == null)
-            {
-                MessageBox.Show("Selecione uma questão primeiro", "Edição de Questão", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            telaQuestaoForm.ConfigurarTela(questaoSelecionada);
 
-                return;
-            }
-
-            TelaQuestoesForm telaQuestao = new TelaQuestoesForm();
-            telaQuestao.Text = "Editar questão existente";
-
-            telaQuestao.ConfigurarTela(questaoSelecionada);
-
-            DialogResult opcaoEscolhida = telaQuestao.ShowDialog();
+            DialogResult opcaoEscolhida = telaQuestaoForm.ShowDialog();
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Questao questao = telaQuestao.ObterQuestao();
+                Questao questao = telaQuestaoForm.ObterQuestao();
 
-                repositorioQuestoes.Editar(questao.id, questao);
-            }
+                List<Alternativa> alternativasMarcadas = telaQuestaoForm.ObterAlternativasMarcadas();
 
-            CarregarQuestoes();
-        }
+                List<Alternativa> alternativasDesmarcadas = telaQuestaoForm.ObterAlternativasDesmarcadas();
 
-        public override void Excluir()
-        {
-            Questao questao = ObterQuestaoSelecionada();
-
-            if (questao == null)
-            {
-                MessageBox.Show($"Selecione uma questao primeiro!",
-                    "Exclusão de Questões",
-                    MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão?", "Exclusão de Questões",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (opcaoEscolhida == DialogResult.OK)
-            {
-                repositorioQuestoes.Excluir(questao);
+                repositorioQuestao.Editar(questao.id, questao, alternativasMarcadas, alternativasDesmarcadas);
             }
 
             CarregarQuestoes();
@@ -85,32 +73,48 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         private Questao ObterQuestaoSelecionada()
         {
-            int id = tabelaQuestoes.ObterIdSelecionado();
+            int id = tabelaQuestao.ObterIdSelecionado();
 
-            return repositorioQuestoes.SelecionarPorId(id);
+            return repositorioQuestao.SelecionarPorId(id);
         }
 
-
-        private void CarregarQuestoes()
+        public override void Excluir()
         {
-            List<Questao> listaQuestoes = repositorioQuestoes.SelecionarTodos();
+            Questao questaoSelecionada = ObterQuestaoSelecionada();
 
-            tabelaQuestoes.AtualizarRegistros(listaQuestoes);
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão {questaoSelecionada.id}?", "Exclusão de Matérias",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                repositorioQuestao.Excluir(questaoSelecionada);
+            }
+
+            CarregarQuestoes();
         }
+
 
         public override UserControl ObterListagem()
         {
-            if (tabelaQuestoes == null)
-                tabelaQuestoes = new TabelaQuestoesControl();
+            if (tabelaQuestao == null)
+
+                tabelaQuestao = new TabelaQuestoesControl();
 
             CarregarQuestoes();
 
-            return tabelaQuestoes;
+            return tabelaQuestao;
         }
 
         public override string ObterTipoCadastro()
         {
-            return "Registro de Questão";
+            return "cadastro de questoes";
+        }
+
+        private void CarregarQuestoes()
+        {
+            List<Questao> questoes = repositorioQuestao.SelecionarTodos();
+
+            tabelaQuestao.AtualizarRegistros(questoes);
         }
     }
 }

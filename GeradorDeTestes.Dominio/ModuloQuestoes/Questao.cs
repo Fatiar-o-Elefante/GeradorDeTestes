@@ -10,12 +10,13 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
         public string RespostaCerta { get; set; }
         public List<Alternativa> ListAlternativas { get; set; }
 
-        public Questao(Materia materia, string enunciado, string respostaCerta, List<Alternativa> listAlternativas)
+        public Questao(int id, Materia materia, string enunciado, string respostaCerta)
         {
+            this.id = id;
             Materia = materia;
             Enunciado = enunciado;
             RespostaCerta = respostaCerta;
-            ListAlternativas = listAlternativas;
+            ListAlternativas = new List<Alternativa>();
         }
 
         public override void AtualizarInformacoes(Questao registroAtualizado)
@@ -29,6 +30,24 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
         public override string[] Validar()
         {
             throw new NotImplementedException();
+        }
+
+        public void AdicionarAlternativa(Alternativa alternativa)
+        {
+            ListAlternativas.Add(alternativa);
+        }
+
+        public bool Contem(Alternativa alternativaParaAdicionar)
+        {
+            if (ListAlternativas.Contains(alternativaParaAdicionar))
+                return true;
+
+            return false;
+        }
+
+        public void RemoverAlternativa(Alternativa alternaticaParaRemover)
+        {
+            ListAlternativas.Remove(alternaticaParaRemover);
         }
     }
 }
