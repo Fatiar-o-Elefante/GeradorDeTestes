@@ -2,7 +2,7 @@
 
 namespace GeradorDeTestes.Dominio.ModuloQuestoes
 {
-    public interface IRepositorioQuestoes : IRepositorioBase<Questao>
+    public interface IRepositorioQuestao : IRepositorioBase<Questao>
     {
         void Inserir(Questao questao, List<Alternativa> alternativasAdicionadas);
 

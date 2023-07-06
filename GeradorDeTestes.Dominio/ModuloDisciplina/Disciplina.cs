@@ -17,12 +17,25 @@ namespace GeradorDeTestes.Dominio.ModuloDisciplina
 
         public override void AtualizarInformacoes(Disciplina registroAtualizado)
         {
-            throw new NotImplementedException();
+            Nome = registroAtualizado.Nome;
         }
 
         public override string[] Validar()
         {
-            throw new NotImplementedException();
+            List<string> erros = new List<string>();
+
+            if (string.IsNullOrEmpty(Nome))
+                erros.Add("O campo 'nome' é obrigatorio");
+
+            if (Nome.Length <= 5)
+                erros.Add("O campo nome deve conter mais de 5 caracteres");
+
+            return erros.ToArray();
+        }
+
+        public override string ToString()
+        {
+            return Nome;
         }
     }
 }

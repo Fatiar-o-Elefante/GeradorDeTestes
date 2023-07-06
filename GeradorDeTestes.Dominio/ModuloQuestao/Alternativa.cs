@@ -9,9 +9,9 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
         public Questao Questao { get; set; }
         public string Resposta { get; set; }
 
-        public Alternativa(Questao questao, string resposta)
+        public Alternativa(Questao questao, string resposta, bool correta)
         {
-            Correta = false;
+            Correta = correta;
             Questao = questao;
             Resposta = resposta;
             Letra = 'A';

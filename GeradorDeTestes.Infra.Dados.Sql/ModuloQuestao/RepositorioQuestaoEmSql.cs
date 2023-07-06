@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 
 namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
 {
-    public class RepositorioQuestaoEmSql : RepositorioEmSqlBase<Questao, MapeadorQuestao>, IRepositorioQuestoes
+    public class RepositorioQuestaoEmSql : RepositorioEmSqlBase<Questao, MapeadorQuestao>, IRepositorioQuestao
     {
         protected override string sqlInserir => @"INSERT INTO[DBO].[TBQUESTOES]
                                                     (

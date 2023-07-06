@@ -8,9 +8,12 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
     public partial class TelaQuestaoForm : Form
     {
         private Questao questao;
+        List<Questao> questoes;
 
-        public TelaQuestaoForm(List<Materia> materias)
+        public TelaQuestaoForm(List<Materia> materias, List<Questao> questoes)
         {
+            this.questoes = questoes;
+
             InitializeComponent();
 
             this.ConfigurarDialog();
@@ -33,13 +36,29 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             int id = int.Parse(txtId.Text);
             string enunciado = txtEnunciado.Text;
             Materia materia = (Materia)cbMateria.SelectedItem;
-            string repostaCerta = chListAlternativas.CheckedItems[0].ToString()!;
+            string respostaCerta;
 
-            questao = new Questao(id, materia, enunciado, repostaCerta);
+            if (chListAlternativas.Items.Count == 0)
+                return null;
 
-            foreach (Alternativa alternativa in chListAlternativas.Items.Cast<Alternativa>().ToList())
+            if (chListAlternativas.CheckedItems.Count == 0)
+                respostaCerta = "erro";
+            else
+                respostaCerta = chListAlternativas.CheckedItems[0].ToString()!;
+
+
+            questao = new Questao(id, materia, enunciado, respostaCerta);
+
+            foreach (Alternativa alternativa in ObterAlternativasDesmarcadas())
             {
-                questao.ListAlternativas.Add(alternativa);
+                questao.AdicionarAlternativa(alternativa);
+            }
+
+            foreach (Alternativa alternativaMarcada in ObterAlternativasMarcadas())
+            {
+                Alternativa alternativa = new Alternativa(questao, respostaCerta, true);
+                alternativa.Correta = true;
+                questao.AdicionarAlternativa(alternativa);
             }
 
             return questao;
@@ -49,7 +68,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
         {
             string resposta = txtResposta.Text;
 
-            return new Alternativa(questao, resposta);
+            return new Alternativa(questao, resposta, false);
         }
 
         public void ConfigurarTela(Questao questao)
@@ -62,11 +81,34 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             {
                 chListAlternativas.Items.Add(alternativa);
             }
+
+            int i = 0;
+
+            for (int j = 0; j < chListAlternativas.Items.Count; j++)
+            {
+                Alternativa alternativa = (Alternativa)chListAlternativas.Items[j];
+
+                if (alternativa.Correta)
+                {
+                    if (questao.ListAlternativas.Contains(alternativa))
+                    {
+                        chListAlternativas.SetItemChecked(i, true);
+                    }
+
+                    i++;
+                }
+            }
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
             Alternativa alternativa = ObterAlternativa(questao);
+
+            if (alternativa.Resposta == "")
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape("É necessário ter uma resposta");
+                return;
+            }
 
             chListAlternativas.Items.Add(alternativa);
         }
@@ -100,6 +142,37 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
         {
             return chListAlternativas.Items.Cast<Alternativa>()
                 .Except(ObterAlternativasMarcadas()).ToList();
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            Questao questao = ObterQuestao();
+
+            ValidarErros(questao);
+        }
+
+        private void ValidarErros(Questao questao)
+        {
+            if (questao == null) return;
+
+            string[] erros = questao.Validar();
+
+            if (erros.Length > 0)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape(erros[0]);
+
+                DialogResult = DialogResult.None;
+            }
+
+            foreach (Questao q in questoes)
+            {
+                if (questao.Enunciado == q.Enunciado && txtId.Text == "0")
+                {
+                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
+
+                    DialogResult = DialogResult.None;
+                }
+            }
         }
     }
 }

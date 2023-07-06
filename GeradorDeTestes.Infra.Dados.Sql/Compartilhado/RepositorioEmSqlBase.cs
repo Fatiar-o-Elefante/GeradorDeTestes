@@ -12,9 +12,8 @@ namespace GeradorDeTestes.Infra.Dados.Sql.Compartilhado
         where TEntidade : EntidadeBase<TEntidade>
         where TMapeador : MapeadorBase<TEntidade>, new()
     {
-        protected string enderecoBanco = "Data Source=(LocalDb)\\MSSqlLocalDB;Initial Catalog=GeradorDeTestes;Integrated " +
-            "Security=True;Pooling=False";
-
+        protected string enderecoBanco = "Data Source = (LocalDb)\\MSSqlLocalDB;Initial Catalog = GeradorDeTestes; Integrated Security = True; Pooling=False";
+        
         protected abstract string sqlInserir { get; }
         protected abstract string sqlEditar { get; }
         protected abstract string sqlExcluir { get; }

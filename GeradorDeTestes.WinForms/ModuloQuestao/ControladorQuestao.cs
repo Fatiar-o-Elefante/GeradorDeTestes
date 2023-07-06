@@ -6,11 +6,11 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 {
     public class ControladorQuestao : ControladorBase
     {
-        private IRepositorioQuestoes repositorioQuestao;
+        private IRepositorioQuestao repositorioQuestao;
         private TabelaQuestaoControl tabelaQuestao;
         private IRepositorioMateria repositorioMateria;
 
-        public ControladorQuestao(IRepositorioQuestoes repositorioQuestao, IRepositorioMateria repositorioMateria)
+        public ControladorQuestao(IRepositorioQuestao repositorioQuestao, IRepositorioMateria repositorioMateria)
         {
             this.repositorioQuestao = repositorioQuestao;
             this.repositorioMateria = repositorioMateria;
@@ -30,7 +30,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         public override void Inserir()
         {
-            TelaQuestaoForm telaQuestaoForm = new TelaQuestaoForm(repositorioMateria.SelecionarTodos());
+            TelaQuestaoForm telaQuestaoForm = new TelaQuestaoForm(repositorioMateria.SelecionarTodos(), repositorioQuestao.SelecionarTodos());
 
             DialogResult opcaoEscolhida = telaQuestaoForm.ShowDialog();
 
@@ -38,9 +38,21 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             {
                 Questao questao = telaQuestaoForm.ObterQuestao();
 
-                List<Alternativa> alternativasAdicionadas = telaQuestaoForm.ObterAlternativasMarcadas();
+                if (questao == null)
+                {
+                    TelaPrincipalForm.Instancia.AtualizarRodape("É necessário adicionar uma alternativa");
+                    telaQuestaoForm.ShowDialog();
+                    return;
+                }
 
-                repositorioQuestao.Inserir(questao, alternativasAdicionadas);
+                if (questao.RespostaCerta == "erro")
+                {
+                    TelaPrincipalForm.Instancia.AtualizarRodape("É necessário marcar uma alternativa");
+                    telaQuestaoForm.ShowDialog();
+                    return;
+                }
+
+                repositorioQuestao.Inserir(questao, questao.ListAlternativas);
             }
 
             CarregarQuestoes();
@@ -49,7 +61,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         public override void Editar()
         {
-            TelaQuestaoForm telaQuestaoForm = new TelaQuestaoForm(repositorioMateria.SelecionarTodos());
+            TelaQuestaoForm telaQuestaoForm = new TelaQuestaoForm(repositorioMateria.SelecionarTodos(), repositorioQuestao.SelecionarTodos());
 
             Questao questaoSelecionada = ObterQuestaoSelecionada();
 
@@ -65,7 +77,18 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
                 List<Alternativa> alternativasDesmarcadas = telaQuestaoForm.ObterAlternativasDesmarcadas();
 
+                foreach (Questao q in repositorioQuestao.SelecionarTodos())
+                {
+                    if (questao.Enunciado == q.Enunciado)
+                    {
+                        TelaPrincipalForm.Instancia.AtualizarRodape("O nome já está em uso");
+                        telaQuestaoForm.ShowDialog();
+                        return;
+                    }
+                }
+
                 repositorioQuestao.Editar(questao.id, questao, alternativasMarcadas, alternativasDesmarcadas);
+
             }
 
             CarregarQuestoes();
@@ -92,7 +115,6 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             CarregarQuestoes();
         }
-
 
         public override UserControl ObterListagem()
         {

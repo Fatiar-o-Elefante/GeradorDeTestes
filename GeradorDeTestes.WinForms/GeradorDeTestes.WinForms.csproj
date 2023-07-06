@@ -9,8 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GeradorDeTestes.Dominio\GeradorDeTestes.Dominio.csproj" />
     <ProjectReference Include="..\GeradorDeTestes.Infra.Dados.Sql\GeradorDeTestes.Infra.Dados.Sql.csproj" />
+    <ProjectReference Include="..\GeradosDeTestes.Infra.Dados.SQL.ProjetoDataBase\GeradosDeTestes.Infra.Dados.SQL.ProjetoDataBase.sqlproj" />
   </ItemGroup>
 
   <ItemGroup>
