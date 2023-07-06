@@ -34,6 +34,9 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
             if (Materia == null)
                 erros.Add("O campo 'Matéria' é obrigatorio");
 
+            if (string.IsNullOrEmpty(Enunciado))
+                erros.Add("O campo 'Enunciado' é obrigatório");
+
             if (Enunciado.Length <= 5)
                 erros.Add("O campo enunciado deve conter mais de 5 caracteres");
 

@@ -35,6 +35,12 @@ namespace GeradorDeTestes.Dominio.ModuloMateria
             if (Nome.Length < 4)
                 erros.Add("O campo 'Nome' deve conter no mínimo 4 caracteres");
 
+            if (Disciplina == null)
+                erros.Add("O campo 'Disciplina' é obrigatório");
+
+            if (Serie == 0)
+                erros.Add("O campo 'Serie' é obrigatório");
+
             return erros.ToArray();
         }
     }
