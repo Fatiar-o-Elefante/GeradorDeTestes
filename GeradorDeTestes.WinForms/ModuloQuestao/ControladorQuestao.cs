@@ -7,7 +7,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
     public class ControladorQuestao : ControladorBase
     {
         private IRepositorioQuestoes repositorioQuestao;
-        private TabelaQuestoesControl tabelaQuestao;
+        private TabelaQuestaoControl tabelaQuestao;
         private IRepositorioMateria repositorioMateria;
 
         public ControladorQuestao(IRepositorioQuestoes repositorioQuestao, IRepositorioMateria repositorioMateria)
@@ -30,7 +30,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         public override void Inserir()
         {
-            TelaQuestoesForm telaQuestaoForm = new TelaQuestoesForm(repositorioMateria.SelecionarTodos());
+            TelaQuestaoForm telaQuestaoForm = new TelaQuestaoForm(repositorioMateria.SelecionarTodos());
 
             DialogResult opcaoEscolhida = telaQuestaoForm.ShowDialog();
 
@@ -49,7 +49,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         public override void Editar()
         {
-            TelaQuestoesForm telaQuestaoForm = new TelaQuestoesForm(repositorioMateria.SelecionarTodos());
+            TelaQuestaoForm telaQuestaoForm = new TelaQuestaoForm(repositorioMateria.SelecionarTodos());
 
             Questao questaoSelecionada = ObterQuestaoSelecionada();
 
@@ -98,7 +98,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
         {
             if (tabelaQuestao == null)
 
-                tabelaQuestao = new TabelaQuestoesControl();
+                tabelaQuestao = new TabelaQuestaoControl();
 
             CarregarQuestoes();
 

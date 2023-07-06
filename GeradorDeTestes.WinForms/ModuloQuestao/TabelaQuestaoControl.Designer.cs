@@ -1,6 +1,6 @@
 ﻿namespace GeradorDeTestes.WinForms.ModuloQuestoes
 {
-    partial class TabelaQuestoesControl
+    partial class TabelaQuestaoControl
     {
         /// <summary> 
         /// Required designer variable.

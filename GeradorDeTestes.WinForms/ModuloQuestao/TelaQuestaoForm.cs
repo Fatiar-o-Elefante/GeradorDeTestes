@@ -5,11 +5,11 @@ using GeradorDeTestes.WinForms.Compartilhado;
 
 namespace GeradorDeTestes.WinForms.ModuloQuestoes
 {
-    public partial class TelaQuestoesForm : Form
+    public partial class TelaQuestaoForm : Form
     {
         private Questao questao;
 
-        public TelaQuestoesForm(List<Materia> materias)
+        public TelaQuestaoForm(List<Materia> materias)
         {
             InitializeComponent();
 
