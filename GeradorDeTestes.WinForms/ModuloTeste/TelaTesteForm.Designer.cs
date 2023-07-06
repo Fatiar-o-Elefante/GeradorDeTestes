@@ -42,8 +42,8 @@
             cbMateria = new ComboBox();
             chProvaRecup = new CheckBox();
             groupBox1 = new GroupBox();
-            btnSortear = new Button();
             listBoxSorteadas = new ListBox();
+            btnSortear = new Button();
             ((System.ComponentModel.ISupportInitialize)numQtdQuestoes).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -77,6 +77,7 @@
             btnGravar.TabIndex = 10;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += btnGravar_Click;
             // 
             // btnCancelar
             // 
@@ -176,15 +177,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Questões Selecionadas";
             // 
-            // btnSortear
-            // 
-            btnSortear.Location = new Point(6, 22);
-            btnSortear.Name = "btnSortear";
-            btnSortear.Size = new Size(75, 23);
-            btnSortear.TabIndex = 0;
-            btnSortear.Text = "Sortear";
-            btnSortear.UseVisualStyleBackColor = true;
-            // 
             // listBoxSorteadas
             // 
             listBoxSorteadas.FormattingEnabled = true;
@@ -193,6 +185,16 @@
             listBoxSorteadas.Name = "listBoxSorteadas";
             listBoxSorteadas.Size = new Size(338, 124);
             listBoxSorteadas.TabIndex = 1;
+            // 
+            // btnSortear
+            // 
+            btnSortear.Location = new Point(6, 22);
+            btnSortear.Name = "btnSortear";
+            btnSortear.Size = new Size(75, 23);
+            btnSortear.TabIndex = 0;
+            btnSortear.Text = "Sortear";
+            btnSortear.UseVisualStyleBackColor = true;
+            btnSortear.Click += btnSortear_Click_1;
             // 
             // TelaTesteForm
             // 

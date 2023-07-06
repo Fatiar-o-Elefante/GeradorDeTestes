@@ -6,7 +6,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
 {
     public class RepositorioQuestaoEmSql : RepositorioEmSqlBase<Questao, MapeadorQuestao>, IRepositorioQuestao
     {
-        protected override string sqlInserir => @"INSERT INTO[DBO].[TBQUESTOES]
+        protected override string sqlInserir => @"INSERT INTO[DBO].[TBQUESTAO]
                                                     (
                                                        [MATERIA_ID]
                                                        ,[ENUNCIADO]
@@ -20,14 +20,16 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
                                                     );
                                                  SELECT SCOPE_IDENTITY();";
 
-        protected override string sqlEditar => @"UPDATE[TBQUESTOES]
+        protected override string sqlEditar => @"UPDATE[TBQUESTAO]
                                                SET
                                                    [MATERIA_ID] = @MATERIA_ID
                                                   ,[ENUNCIADO] = @ENUNCIADO
                                                   ,[RESPOSTA] = @RESPOSTACERTA
                                              WHERE [ID] = @ID;";
 
-        protected override string sqlExcluir => throw new NotImplementedException();
+        protected override string sqlExcluir => @"DELETE FROM [TBQUESTAO]
+	                                                WHERE 
+		                                                [ID] = @ID";
 
         protected override string sqlSelecionarTodos => @"SELECT 
 	                                                        Q.[ID]                QUESTAO_ID 
@@ -39,7 +41,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
                                                            ,M.[DISCIPLINA_ID]     DISCIPLINA_ID
                                                            ,D.[NOME]   DISCIPLINA_NOME
                                                         FROM 
-	                                                        [TBQUESTOES] AS Q
+	                                                        [TBQUESTAO] AS Q
                                                         INNER JOIN [TBMATERIA] AS M
                                                                 ON Q.[MATERIA_ID] = M.ID
                                                         INNER JOIN [TBDISCIPLINA] AS D
@@ -55,7 +57,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
                                                            ,M.[DISCIPLINA_ID]     DISCIPLINA_ID
                                                            ,D.[NOME]   DISCIPLINA_NOME
                                                     FROM 
-	                                                        [TBQUESTOES] AS Q
+	                                                        [TBQUESTAO] AS Q
                                                         INNER JOIN [TBMATERIA] AS M
                                                                 ON Q.[MATERIA_ID] = M.ID
                                                         INNER JOIN [TBDISCIPLINA] AS D
@@ -99,7 +101,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
             FROM 
                 TBALTERNATIVA A
 
-                INNER JOIN TBQUESTOES Q
+                INNER JOIN TBQUESTAO Q
 
                     ON Q.ID = A.QUESTAO_ID
 
@@ -120,12 +122,6 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
 
         public void Inserir(Questao questao, List<Alternativa> alternativasAdicionadas)
         {
-            foreach (Alternativa alternativa in alternativasAdicionadas)
-            {
-                questao.AdicionarAlternativa(alternativa);
-            }
-
-            //obter a conexão com o banco e abrir ela
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
             conexaoComBanco.Open();
 
@@ -275,27 +271,6 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
             comandoInserir.Parameters.AddWithValue("QUESTAO_ID", questao.id);
             comandoInserir.Parameters.AddWithValue("RESPOSTA", alternativa.Resposta);
             comandoInserir.Parameters.AddWithValue("CORRETA", alternativa.Correta);
-
-            //executa o comando
-            comandoInserir.ExecuteNonQuery();
-
-            //fecha conexão
-            conexaoComBanco.Close();
-        }
-
-        private void RemoverAlternativa(Alternativa alternativa, Questao questao)
-        {
-            //obter a conexão com o banco e abrir ela
-            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-            conexaoComBanco.Open();
-
-            //cria um comando e relaciona com a conexão aberta
-            SqlCommand comandoInserir = conexaoComBanco.CreateCommand();
-            comandoInserir.CommandText = sqlRemoverAlternativas;
-
-            //adiciona os parâmetros no comando
-            comandoInserir.Parameters.AddWithValue("ALTERNATIVA_ID", alternativa.id);
-            comandoInserir.Parameters.AddWithValue("QUESTAO_ID", questao.id);
 
             //executa o comando
             comandoInserir.ExecuteNonQuery();

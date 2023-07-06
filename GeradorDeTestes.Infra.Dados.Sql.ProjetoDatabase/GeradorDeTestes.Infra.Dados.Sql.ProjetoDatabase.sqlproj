@@ -6,7 +6,7 @@
     <Name>GeradorDeTestes.Infra.Dados.Sql.ProjetoDatabase</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{406f684f-3adb-494d-8611-b52a9c54861e}</ProjectGuid>
+    <ProjectGuid>{d31013ac-d13a-4555-be8b-4e627a07d531}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -60,9 +60,10 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\TBTeste.sql" />
-    <Build Include="dbo\Tables\TBQuestoes.sql" />
-    <Build Include="dbo\Tables\TBMateria.sql" />
-    <Build Include="dbo\Tables\TBDisciplina.sql" />
+    <Build Include="dbo\Tables\TbTeste.sql" />
+    <Build Include="dbo\Tables\TbQuestao.sql" />
+    <Build Include="dbo\Tables\TbMateria.sql" />
+    <Build Include="dbo\Tables\TbDisciplina.sql" />
+    <Build Include="dbo\Tables\TbAlternativa.sql" />
   </ItemGroup>
 </Project>

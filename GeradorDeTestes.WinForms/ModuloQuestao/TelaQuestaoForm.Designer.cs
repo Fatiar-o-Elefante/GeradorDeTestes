@@ -40,8 +40,8 @@
             label4 = new Label();
             btnAdicionar = new Button();
             groupBox1 = new GroupBox();
-            chListAlternativas = new CheckedListBox();
             btnRemover = new Button();
+            chListAlternativas = new CheckedListBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -74,6 +74,7 @@
             btnGravar.TabIndex = 6;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += btnGravar_Click;
             // 
             // btnCancelar
             // 
@@ -143,6 +144,7 @@
             btnAdicionar.TabIndex = 15;
             btnAdicionar.Text = "Adicionar";
             btnAdicionar.UseVisualStyleBackColor = true;
+            btnAdicionar.Click += btnAdicionar_Click_1;
             // 
             // groupBox1
             // 
@@ -155,14 +157,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Alternativas";
             // 
-            // chListAlternativas
-            // 
-            chListAlternativas.FormattingEnabled = true;
-            chListAlternativas.Location = new Point(9, 58);
-            chListAlternativas.Name = "chListAlternativas";
-            chListAlternativas.Size = new Size(274, 112);
-            chListAlternativas.TabIndex = 0;
-            // 
             // btnRemover
             // 
             btnRemover.Location = new Point(9, 22);
@@ -171,8 +165,18 @@
             btnRemover.TabIndex = 17;
             btnRemover.Text = "Remover";
             btnRemover.UseVisualStyleBackColor = true;
+            btnRemover.Click += btnRemover_Click_1;
             // 
-            // TelaQuestoesForm
+            // chListAlternativas
+            // 
+            chListAlternativas.FormattingEnabled = true;
+            chListAlternativas.Location = new Point(9, 58);
+            chListAlternativas.Name = "chListAlternativas";
+            chListAlternativas.Size = new Size(274, 112);
+            chListAlternativas.TabIndex = 0;
+            chListAlternativas.SelectedIndexChanged += chListAlternativas_SelectedIndexChanged;
+            // 
+            // TelaQuestaoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -189,7 +193,7 @@
             Controls.Add(label1);
             Controls.Add(btnGravar);
             Controls.Add(btnCancelar);
-            Name = "TelaQuestoesForm";
+            Name = "TelaQuestaoForm";
             Text = "Cadastro de Questoes";
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);

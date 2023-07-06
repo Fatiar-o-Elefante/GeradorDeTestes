@@ -82,7 +82,7 @@
             materiaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { materiaMenuItem, disciplinaMenuItem });
             materiaToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
-            materiaToolStripMenuItem.Size = new Size(123, 22);
+            materiaToolStripMenuItem.Size = new Size(180, 22);
             materiaToolStripMenuItem.Text = "Matéria";
             // 
             // materiaMenuItem
@@ -91,6 +91,7 @@
             materiaMenuItem.Name = "materiaMenuItem";
             materiaMenuItem.Size = new Size(125, 22);
             materiaMenuItem.Text = "Matéria";
+            materiaMenuItem.Click += materiaMenuItem_Click_1;
             // 
             // disciplinaMenuItem
             // 
@@ -98,20 +99,23 @@
             disciplinaMenuItem.Name = "disciplinaMenuItem";
             disciplinaMenuItem.Size = new Size(125, 22);
             disciplinaMenuItem.Text = "Disciplina";
+            disciplinaMenuItem.Click += disciplinaMenuItem_Click_1;
             // 
             // questoesMenuItem
             // 
             questoesMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             questoesMenuItem.Name = "questoesMenuItem";
-            questoesMenuItem.Size = new Size(123, 22);
+            questoesMenuItem.Size = new Size(180, 22);
             questoesMenuItem.Text = "Questões";
+            questoesMenuItem.Click += questoesMenuItem_Click_1;
             // 
             // testesMenuItem
             // 
             testesMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             testesMenuItem.Name = "testesMenuItem";
-            testesMenuItem.Size = new Size(123, 22);
+            testesMenuItem.Size = new Size(180, 22);
             testesMenuItem.Text = "Testes";
+            testesMenuItem.Click += testesMenuItem_Click_1;
             // 
             // barraFerramentas
             // 
@@ -133,6 +137,7 @@
             btnInserir.Padding = new Padding(7);
             btnInserir.Size = new Size(46, 46);
             btnInserir.Text = "toolStripButton1";
+            btnInserir.Click += btnInserir_Click_1;
             // 
             // btnEditar
             // 
@@ -143,6 +148,7 @@
             btnEditar.Padding = new Padding(7);
             btnEditar.Size = new Size(46, 46);
             btnEditar.Text = "toolStripButton3";
+            btnEditar.Click += btnEditar_Click_1;
             // 
             // btnExcluir
             // 
@@ -153,6 +159,7 @@
             btnExcluir.Padding = new Padding(7);
             btnExcluir.Size = new Size(46, 46);
             btnExcluir.Text = "toolStripButton2";
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // toolStripSeparator1
             // 
@@ -169,6 +176,7 @@
             btnDuplicar.Padding = new Padding(7);
             btnDuplicar.Size = new Size(46, 46);
             btnDuplicar.Text = "toolStripButton4";
+            btnDuplicar.Click += btnDuplicar_Click_1;
             // 
             // toolStripSeparator3
             // 
@@ -185,6 +193,7 @@
             btnVisualizar.Padding = new Padding(7);
             btnVisualizar.Size = new Size(46, 46);
             btnVisualizar.Text = "toolStripButton4";
+            btnVisualizar.Click += btnVisualizar_Click_1;
             // 
             // toolStripSeparator2
             // 
@@ -201,6 +210,7 @@
             btnSalvar.Padding = new Padding(7);
             btnSalvar.Size = new Size(46, 46);
             btnSalvar.Text = "toolStripButton4";
+            btnSalvar.Click += btnSalvar_Click_1;
             // 
             // toolStripSeparator4
             // 

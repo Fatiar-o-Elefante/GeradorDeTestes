@@ -23,6 +23,7 @@ namespace GeradorDeTestes.WinForms
         private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmSql();
         private IRepositorioMateria repositorioMateria = new RepositorioMateriaEmSql();
         private IRepositorioQuestao repositorioQuestao = new RepositorioQuestaoEmSql();
+        private IRepositorioTeste repositorioTeste = new RepositorioTesteEmSql();
 
         public TelaPrincipalForm()
         {
@@ -96,40 +97,12 @@ namespace GeradorDeTestes.WinForms
             //btnSalvar.ToolTipText = controlador.ToolTipSalvar;
         }
 
-        private void materiaMenuItem_Click(object sender, EventArgs e)
-        {
-            controlador = new ControladorMateria(repositorioDisciplina, repositorioMateria);
-
-            ConfigurarTelaPrincipal(controlador);
-        }
-
-        private void disciplinaMenuItem_Click(object sender, EventArgs e)
-        {
-            //controlador = new ControladorDisciplina(repositorioDisciplina);
-
-            ConfigurarTelaPrincipal(controlador);
-        }
-
-        private void questoesMenuItem_Click(object sender, EventArgs e)
-        {
-            controlador = new ControladorQuestao(repositorioQuestao, repositorioMateria);
-
-            ConfigurarTelaPrincipal(controlador);
-        }
-
-        private void testesMenuItem_Click(object sender, EventArgs e)
-        {
-            controlador = new ControladorTeste();
-
-            ConfigurarTelaPrincipal(controlador);
-        }
-
-        private void btnInserir_Click(object sender, EventArgs e)
+        private void btnInserir_Click_1(object sender, EventArgs e)
         {
             controlador.Inserir();
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private void btnEditar_Click_1(object sender, EventArgs e)
         {
             controlador.Editar();
         }
@@ -139,19 +112,47 @@ namespace GeradorDeTestes.WinForms
             controlador.Excluir();
         }
 
-        private void btnDuplicar_Click(object sender, EventArgs e)
+        private void btnDuplicar_Click_1(object sender, EventArgs e)
         {
             //controlador.Duplicar();
         }
 
-        private void btnVisualizar_Click(object sender, EventArgs e)
+        private void btnVisualizar_Click_1(object sender, EventArgs e)
         {
             controlador.Visualizar();
         }
 
-        private void btnSalvar_Click(object sender, EventArgs e)
+        private void btnSalvar_Click_1(object sender, EventArgs e)
         {
             //controlador.Salvar();
+        }
+
+        private void materiaMenuItem_Click_1(object sender, EventArgs e)
+        {
+            controlador = new ControladorMateria(repositorioDisciplina, repositorioMateria);
+
+            ConfigurarTelaPrincipal(controlador);
+        }
+
+        private void disciplinaMenuItem_Click_1(object sender, EventArgs e)
+        {
+            controlador = new ControladorDisciplina(repositorioDisciplina);
+
+            ConfigurarTelaPrincipal(controlador);
+        }
+
+        private void questoesMenuItem_Click_1(object sender, EventArgs e)
+        {
+            controlador = new ControladorQuestao(repositorioQuestao, repositorioMateria);
+
+            ConfigurarTelaPrincipal(controlador);
+        }
+
+        private void testesMenuItem_Click_1(object sender, EventArgs e)
+        {
+            controlador = new ControladorTeste(repositorioTeste, repositorioDisciplina, repositorioMateria, repositorioQuestao);
+
+            ConfigurarTelaPrincipal(controlador);
         }
     }
 }

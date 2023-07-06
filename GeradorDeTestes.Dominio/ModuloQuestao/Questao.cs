@@ -29,7 +29,24 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
 
         public override string[] Validar()
         {
-            throw new NotImplementedException();
+            List<string> erros = new List<string>();
+
+            if (Materia == null)
+                erros.Add("O campo 'Matéria' é obrigatorio");
+
+            if (Enunciado.Length <= 5)
+                erros.Add("O campo enunciado deve conter mais de 5 caracteres");
+
+            if (string.IsNullOrEmpty(RespostaCerta))
+                erros.Add("O campo  'Resposta' é obrigatorio");
+
+            if (ListAlternativas.Count < 2)
+                erros.Add("É necessário adicionar no mínimo 2 alternativas");
+
+            if (ListAlternativas.Count > 5)
+                erros.Add("O valor máximo de alternativas é 5");
+
+            return erros.ToArray();
         }
 
         public void AdicionarAlternativa(Alternativa alternativa)
@@ -48,6 +65,11 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
         public void RemoverAlternativa(Alternativa alternaticaParaRemover)
         {
             ListAlternativas.Remove(alternaticaParaRemover);
+        }
+
+        public override string ToString()
+        {
+            return Enunciado.ToString();
         }
     }
 }

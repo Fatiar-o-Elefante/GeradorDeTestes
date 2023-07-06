@@ -100,39 +100,6 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             }
         }
 
-        private void btnAdicionar_Click(object sender, EventArgs e)
-        {
-            Alternativa alternativa = ObterAlternativa(questao);
-
-            if (alternativa.Resposta == "")
-            {
-                TelaPrincipalForm.Instancia.AtualizarRodape("É necessário ter uma resposta");
-                return;
-            }
-
-            chListAlternativas.Items.Add(alternativa);
-        }
-
-        private void btnRemover_Click(object sender, EventArgs e)
-        {
-            chListAlternativas.Items.Remove(chListAlternativas.SelectedItem);
-        }
-
-        private void chListAlternativas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = chListAlternativas.SelectedIndex;
-
-            int count = chListAlternativas.Items.Count;
-
-            for (int x = 0; x < count; x++)
-            {
-                if (index != x)
-                {
-                    chListAlternativas.SetItemCheckState(x, CheckState.Unchecked);
-                }
-            }
-        }
-
         public List<Alternativa> ObterAlternativasMarcadas()
         {
             return chListAlternativas.CheckedItems.Cast<Alternativa>().ToList();
@@ -142,13 +109,6 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
         {
             return chListAlternativas.Items.Cast<Alternativa>()
                 .Except(ObterAlternativasMarcadas()).ToList();
-        }
-
-        private void btnGravar_Click(object sender, EventArgs e)
-        {
-            Questao questao = ObterQuestao();
-
-            ValidarErros(questao);
         }
 
         private void ValidarErros(Questao questao)
@@ -171,6 +131,46 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                     TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
 
                     DialogResult = DialogResult.None;
+                }
+            }
+        }
+
+        private void btnAdicionar_Click_1(object sender, EventArgs e)
+        {
+            Alternativa alternativa = ObterAlternativa(questao);
+
+            if (alternativa.Resposta == "")
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape("É necessário ter uma resposta");
+                return;
+            }
+
+            chListAlternativas.Items.Add(alternativa);
+        }
+
+        private void btnRemover_Click_1(object sender, EventArgs e)
+        {
+            chListAlternativas.Items.Remove(chListAlternativas.SelectedItem);
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            Questao questao = ObterQuestao();
+
+            ValidarErros(questao);
+        }
+
+        private void chListAlternativas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = chListAlternativas.SelectedIndex;
+
+            int count = chListAlternativas.Items.Count;
+
+            for (int x = 0; x < count; x++)
+            {
+                if (index != x)
+                {
+                    chListAlternativas.SetItemCheckState(x, CheckState.Unchecked);
                 }
             }
         }

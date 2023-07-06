@@ -14,24 +14,38 @@ namespace GeradorDeTestes.Dominio.ModuloTestes
         public bool ProvaRecuperacao { get; set; }
         public List<Questao> ListQuestoes { get; set; }
 
-        public Teste(string titulo, Disciplina disciplina, Materia materia, int quantidadeQuestoes, bool provaRecuperacao, List<Questao> listQuestoes)
+        public Teste(int id, string titulo, Disciplina disciplina, Materia materia, int quantidadeQuestoes, bool provaRecuperacao)
         {
+            this.id = id;
             Titulo = titulo;
             Disciplina = disciplina;
             Materia = materia;
             QuantidadeQuestoes = quantidadeQuestoes;
             ProvaRecuperacao = provaRecuperacao;
-            ListQuestoes = listQuestoes;
+            ListQuestoes = new List<Questao>();
         }
 
         public override void AtualizarInformacoes(Teste registroAtualizado)
         {
-            throw new NotImplementedException();
+            Titulo = registroAtualizado.Titulo;
+            Disciplina = registroAtualizado.Disciplina;
+            Materia = registroAtualizado.Materia;
+            QuantidadeQuestoes = registroAtualizado.QuantidadeQuestoes;
+            ProvaRecuperacao = registroAtualizado.ProvaRecuperacao;
+            ListQuestoes = registroAtualizado.ListQuestoes;
         }
 
         public override string[] Validar()
         {
-            throw new NotImplementedException();
+            List<string> erros = new List<string>();
+
+            if (string.IsNullOrEmpty(Titulo))
+                erros.Add("O campo 'titulo' é obrigatorio");
+
+            if (Disciplina == null)
+                erros.Add("O campo  'disciplina' é obrigatorio");
+
+            return erros.ToArray();
         }
     }
 }
