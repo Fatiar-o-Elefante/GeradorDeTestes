@@ -15,9 +15,14 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
 {
     public partial class TelaMateriaForm : Form
     {
-        public TelaMateriaForm(List<Disciplina> disciplinas)
+        private List<Materia> materias;
+
+        public TelaMateriaForm(List<Disciplina> disciplinas, List<Materia> materias)
         {
+            this.materias = materias;
+
             InitializeComponent();
+            this.ConfigurarDialog();
 
             CarregarDisciplinas(disciplinas);
         }
@@ -55,12 +60,43 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
         {
             txtId.Text = materiaSelecionada.id.ToString();
             txtNome.Text = materiaSelecionada.Nome;
-            cbDisciplina.SelectedItem = materiaSelecionada.Disciplina;
+            cbDisciplina.Text = materiaSelecionada.Disciplina.ToString();
 
             if (materiaSelecionada.Serie == 1)
                 rdbPrimeiro.Checked = true;
             if (materiaSelecionada.Serie == 2)
                 rdbSegundo.Checked = true;
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            Materia materia = ObterMateria();
+
+            ValidarErros(materia);
+        }
+
+        private void ValidarErros(Materia materia)
+        {
+            if (materia == null) return;
+
+            string[] erros = materia.Validar();
+
+            if (erros.Length > 0)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape(erros[0]);
+
+                DialogResult = DialogResult.None;
+            }
+
+            foreach (Materia d in materias)
+            {
+                if (materia.Nome == d.Nome && txtId.Text == "0")
+                {
+                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
+
+                    DialogResult = DialogResult.None;
+                }
+            }
         }
     }
 }

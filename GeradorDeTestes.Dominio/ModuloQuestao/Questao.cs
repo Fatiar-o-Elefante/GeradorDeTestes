@@ -38,7 +38,7 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
                 erros.Add("O campo enunciado deve conter mais de 5 caracteres");
 
             if (string.IsNullOrEmpty(RespostaCerta))
-                erros.Add("O campo  'Resposta' é obrigatorio");
+                erros.Add("O campo 'Resposta' é obrigatorio");
 
             if (ListAlternativas.Count < 2)
                 erros.Add("É necessário adicionar no mínimo 2 alternativas");
