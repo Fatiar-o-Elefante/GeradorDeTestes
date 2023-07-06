@@ -68,13 +68,6 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
                 rdbSegundo.Checked = true;
         }
 
-        private void btnGravar_Click(object sender, EventArgs e)
-        {
-            Materia materia = ObterMateria();
-
-            ValidarErros(materia);
-        }
-
         private void ValidarErros(Materia materia)
         {
             if (materia == null) return;
@@ -90,13 +83,20 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
 
             foreach (Materia d in materias)
             {
-                if (materia.Nome == d.Nome && txtId.Text == "0")
+                if (materia.Nome.ToLower() == d.Nome.ToLower() && txtId.Text == "0")
                 {
                     TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
 
                     DialogResult = DialogResult.None;
                 }
             }
+        }
+
+        private void btnGravar_Click_1(object sender, EventArgs e)
+        {
+            Materia materia = ObterMateria();
+
+            ValidarErros(materia);
         }
     }
 }

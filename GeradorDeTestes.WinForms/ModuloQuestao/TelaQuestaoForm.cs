@@ -126,7 +126,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             foreach (Questao q in questoes)
             {
-                if (questao.Enunciado == q.Enunciado && txtId.Text == "0")
+                if (questao.Enunciado.ToLower() == q.Enunciado.ToLower() && txtId.Text == "0")
                 {
                     TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
 

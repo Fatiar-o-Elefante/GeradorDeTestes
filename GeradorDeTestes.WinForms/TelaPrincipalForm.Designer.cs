@@ -53,7 +53,6 @@
             lblStatus = new ToolStripStatusLabel();
             menuBar.SuspendLayout();
             barraFerramentas.SuspendLayout();
-            panelRegistros.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,7 +64,7 @@
             menuBar.Location = new Point(0, 0);
             menuBar.Name = "menuBar";
             menuBar.Padding = new Padding(4, 1, 0, 1);
-            menuBar.Size = new Size(597, 34);
+            menuBar.Size = new Size(624, 34);
             menuBar.TabIndex = 0;
             menuBar.Text = "menuStrip1";
             // 
@@ -82,7 +81,7 @@
             materiaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { materiaMenuItem, disciplinaMenuItem });
             materiaToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
-            materiaToolStripMenuItem.Size = new Size(180, 22);
+            materiaToolStripMenuItem.Size = new Size(123, 22);
             materiaToolStripMenuItem.Text = "Matéria";
             // 
             // materiaMenuItem
@@ -105,7 +104,7 @@
             // 
             questoesMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             questoesMenuItem.Name = "questoesMenuItem";
-            questoesMenuItem.Size = new Size(180, 22);
+            questoesMenuItem.Size = new Size(123, 22);
             questoesMenuItem.Text = "Questões";
             questoesMenuItem.Click += questoesMenuItem_Click_1;
             // 
@@ -113,7 +112,7 @@
             // 
             testesMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             testesMenuItem.Name = "testesMenuItem";
-            testesMenuItem.Size = new Size(180, 22);
+            testesMenuItem.Size = new Size(123, 22);
             testesMenuItem.Text = "Testes";
             testesMenuItem.Click += testesMenuItem_Click_1;
             // 
@@ -124,7 +123,7 @@
             barraFerramentas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator1, btnDuplicar, toolStripSeparator3, btnVisualizar, toolStripSeparator2, btnSalvar, toolStripSeparator4, lblTipoCadastro });
             barraFerramentas.Location = new Point(0, 34);
             barraFerramentas.Name = "barraFerramentas";
-            barraFerramentas.Size = new Size(597, 49);
+            barraFerramentas.Size = new Size(624, 49);
             barraFerramentas.TabIndex = 1;
             barraFerramentas.Text = "toolStrip1";
             // 
@@ -227,22 +226,21 @@
             // panelRegistros
             // 
             panelRegistros.BackColor = Color.Transparent;
-            panelRegistros.Controls.Add(statusStrip1);
             panelRegistros.Dock = DockStyle.Fill;
             panelRegistros.Location = new Point(0, 83);
             panelRegistros.Margin = new Padding(2);
             panelRegistros.Name = "panelRegistros";
-            panelRegistros.Size = new Size(597, 282);
+            panelRegistros.Size = new Size(624, 285);
             panelRegistros.TabIndex = 2;
             // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(28, 28);
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip1.Location = new Point(0, 260);
+            statusStrip1.Location = new Point(0, 346);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new Padding(1, 0, 8, 0);
-            statusStrip1.Size = new Size(597, 22);
+            statusStrip1.Size = new Size(624, 22);
             statusStrip1.TabIndex = 0;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -256,7 +254,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(597, 365);
+            ClientSize = new Size(624, 368);
+            Controls.Add(statusStrip1);
             Controls.Add(panelRegistros);
             Controls.Add(barraFerramentas);
             Controls.Add(menuBar);
@@ -269,8 +268,6 @@
             menuBar.PerformLayout();
             barraFerramentas.ResumeLayout(false);
             barraFerramentas.PerformLayout();
-            panelRegistros.ResumeLayout(false);
-            panelRegistros.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ResumeLayout(false);

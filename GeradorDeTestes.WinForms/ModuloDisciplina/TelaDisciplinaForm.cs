@@ -33,14 +33,6 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             txtId.Text = disciplinaSelecionada.id.ToString();
             txtNome.Text = disciplinaSelecionada.Nome;
         }
-
-        private void btnGravar_Click(object sender, EventArgs e)
-        {
-            Disciplina disciplina = ObterDisciplina();
-
-            ValidarErros(disciplina);
-        }
-
         private void ValidarErros(Disciplina disciplina)
         {
             string[] erros = disciplina.Validar();
@@ -61,6 +53,13 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
                     DialogResult = DialogResult.None;
                 }
             }
+        }
+
+        private void btnGravar_Click_1(object sender, EventArgs e)
+        {
+            Disciplina disciplina = ObterDisciplina();
+
+            ValidarErros(disciplina);
         }
     }
 }

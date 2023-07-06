@@ -42,6 +42,9 @@ namespace GeradorDeTestes.Dominio.ModuloTestes
             if (string.IsNullOrEmpty(Titulo))
                 erros.Add("O campo 'titulo' é obrigatorio");
 
+            if (Titulo.Length < 4)
+                erros.Add("O campo 'Teste' deve conter no mínimo 4 caracteres");
+
             if (Disciplina == null)
                 erros.Add("O campo  'disciplina' é obrigatorio");
 
