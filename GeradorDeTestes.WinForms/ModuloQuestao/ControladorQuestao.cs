@@ -16,9 +16,9 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             this.repositorioMateria = repositorioMateria;
         }
 
-        public override string ToolTipInserir => "Enserir Nova Questão";
+        public override string ToolTipInserir => "Inserir Questão";
 
-        public override string ToolTipEditar => "Editar Questão Existente";
+        public override string ToolTipEditar => "Editar Questão";
 
         public override string ToolTipExcluir => "Excluir Questão";
 

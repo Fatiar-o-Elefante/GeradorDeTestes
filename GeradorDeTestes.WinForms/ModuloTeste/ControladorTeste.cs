@@ -22,9 +22,9 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             this.repositorioQuestao = repositorioQuestao;
         }
 
-        public override string ToolTipInserir => "Inserir Novo Teste";
+        public override string ToolTipInserir => "Inserir Teste";
 
-        public override string ToolTipEditar => "Editar Teste Existente";
+        public override string ToolTipEditar => "Editar Teste";
 
         public override string ToolTipExcluir => "Excluir Teste Existente";
 

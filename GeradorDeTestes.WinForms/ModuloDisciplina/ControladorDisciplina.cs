@@ -16,11 +16,11 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             this.repositorioDisciplina = repositorioDisciplina;
         }
 
-        public override string ToolTipInserir => "Inserir nova Disciplina";
+        public override string ToolTipInserir => "Inserir Disciplina";
 
-        public override string ToolTipEditar => "Editar Disciplina existente";
+        public override string ToolTipEditar => "Editar Disciplina";
 
-        public override string ToolTipExcluir => "Excluir Disciplina existente";
+        public override string ToolTipExcluir => "Excluir Disciplina";
 
         public override string ToolTipVisualizar => "Visualizar Matérias da Disciplina";
 
