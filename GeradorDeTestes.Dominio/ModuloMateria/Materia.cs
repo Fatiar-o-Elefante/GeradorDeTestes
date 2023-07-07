@@ -43,5 +43,9 @@ namespace GeradorDeTestes.Dominio.ModuloMateria
 
             return erros.ToArray();
         }
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }

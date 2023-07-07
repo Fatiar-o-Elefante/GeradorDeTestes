@@ -9,16 +9,19 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
     public partial class TelaTesteForm : Form
     {
         private List<Questao> questoes;
+        private List<Teste> testes;
 
-        public TelaTesteForm(List<Materia> materias, List<Disciplina> disciplinas, List<Questao> questoes)
+        public TelaTesteForm(List<Materia> materias, List<Disciplina> disciplinas, List<Questao> questoes, List<Teste> testes)
         {
             this.questoes = questoes;
+            this.testes = testes;
 
             InitializeComponent();
             this.ConfigurarDialog();
 
             ConfigurarComboBoxDisciplina(disciplinas);
             ConfigurarComboBoxMateria(materias);
+            this.testes = testes;
         }
 
         public Teste ObterTeste()
@@ -62,6 +65,18 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             }
         }
 
+        public List<Questao> ObterQuestoesSorteadas()
+        {
+            return listBoxSorteadas.Items.Cast<Questao>().ToList();
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            Teste teste = ObterTeste();
+
+            ValidarErros(teste);
+        }
+
         private void ValidarErros(Teste teste)
         {
             if (teste == null) return;
@@ -74,9 +89,19 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
                 DialogResult = DialogResult.None;
             }
+
+            foreach (Teste t in testes)
+            {
+                if (teste.Titulo == t.Titulo && txtId.Text == "0")
+                {
+                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
+
+                    DialogResult = DialogResult.None;
+                }
+            }
         }
 
-        private void btnSortear_Click_1(object sender, EventArgs e)
+        private void btnSortear_Click(object sender, EventArgs e)
         {
             int quantidade = (int)numQtdQuestoes.Value;
             Random random = new Random();
@@ -93,11 +118,5 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             }
         }
 
-        private void btnGravar_Click(object sender, EventArgs e)
-        {
-            Teste teste = ObterTeste();
-
-            ValidarErros(teste);
-        }
     }
 }

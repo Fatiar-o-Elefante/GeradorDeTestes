@@ -194,7 +194,6 @@
             btnSortear.TabIndex = 0;
             btnSortear.Text = "Sortear";
             btnSortear.UseVisualStyleBackColor = true;
-            btnSortear.Click += btnSortear_Click_1;
             // 
             // TelaTesteForm
             // 

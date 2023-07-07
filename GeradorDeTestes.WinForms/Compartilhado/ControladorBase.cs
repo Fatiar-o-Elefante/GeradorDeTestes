@@ -16,6 +16,10 @@ namespace GeradorDeTestes.WinForms.Compartilhado
 
         public virtual string ToolTipVisualizar { get; }
 
+        public virtual string ToolTipDuplicar { get; }
+
+        public virtual string ToolTipSalvar { get; }
+
         public virtual bool InserirHabilitado { get { return true; } }
 
         public virtual bool EditarHabilitado { get { return true; } }
@@ -24,7 +28,9 @@ namespace GeradorDeTestes.WinForms.Compartilhado
 
         public virtual bool VisualizarHabilitado { get { return true; } }
 
-        public virtual void ApresentarMensagem(string mensagem, string titulo) { }
+        public virtual bool DuplicarHabilitado { get { return true; } }
+
+        public virtual bool SalvarHabilitado { get { return true; } }
 
         public abstract void Inserir();
 
@@ -36,6 +42,18 @@ namespace GeradorDeTestes.WinForms.Compartilhado
         {
 
         }
+
+        public virtual void Duplicar()
+        {
+
+        }
+
+        public virtual void Salvar()
+        {
+
+        }
+
+        public abstract void ApresentarMensagem(string mensagem, string titulo);
 
         public abstract UserControl ObterListagem();
 

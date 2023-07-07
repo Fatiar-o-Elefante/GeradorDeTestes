@@ -11,6 +11,7 @@ using GeradorDeTestes.WinForms.ModuloDisciplina;
 using GeradorDeTestes.WinForms.ModuloMateria;
 using GeradorDeTestes.WinForms.ModuloQuestoes;
 using GeradorDeTestes.WinForms.ModuloTestes;
+using GeradorDeTestes.WinForms.ModuloTestes.GeradorDeTestes.WinForms.ModuloTestes;
 
 namespace GeradorDeTestes.WinForms
 {
@@ -83,8 +84,8 @@ namespace GeradorDeTestes.WinForms
             btnEditar.Enabled = controlador.EditarHabilitado;
             btnExcluir.Enabled = controlador.ExcluirHabilitado;
             btnVisualizar.Enabled = controlador.VisualizarHabilitado;
-            //btnDuplicar.Enabled = controlador.DuplicarHabilitado;
-            //btnSalvar.Enabled = controlador.SalvarHabilitado;
+            btnDuplicar.Enabled = controlador.DuplicarHabilitado;
+            btnSalvar.Enabled = controlador.SalvarHabilitado;
         }
 
         private void ConfigurarToolTips(ControladorBase controlador)
@@ -93,8 +94,8 @@ namespace GeradorDeTestes.WinForms
             btnEditar.ToolTipText = controlador.ToolTipEditar;
             btnExcluir.ToolTipText = controlador.ToolTipExcluir;
             btnVisualizar.ToolTipText = controlador.ToolTipVisualizar;
-            //btnDuplicar.ToolTipText = controlador.ToolTipDuplicar;
-            //btnSalvar.ToolTipText = controlador.ToolTipSalvar;
+            btnDuplicar.ToolTipText = controlador.ToolTipDuplicar;
+            btnSalvar.ToolTipText = controlador.ToolTipSalvar;
         }
 
         private void btnInserir_Click_1(object sender, EventArgs e)

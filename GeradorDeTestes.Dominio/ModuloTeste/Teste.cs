@@ -50,5 +50,10 @@ namespace GeradorDeTestes.Dominio.ModuloTestes
 
             return erros.ToArray();
         }
+
+        public void AdicionarQuestao(Questao questao)
+        {
+            ListQuestoes.Add(questao);
+        }
     }
 }
