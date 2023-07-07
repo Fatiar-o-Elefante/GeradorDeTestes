@@ -3,6 +3,7 @@ using GeradorDeTestes.Dominio.ModuloMateria;
 using GeradorDeTestes.Dominio.ModuloQuestoes;
 using GeradorDeTestes.Dominio.ModuloTestes;
 using GeradorDeTestes.WinForms.Compartilhado;
+using GeradorDeTestes.WinForms.ModuloTeste;
 
 namespace GeradorDeTestes.WinForms.ModuloTestes
 {
@@ -127,12 +128,29 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                 telaListagem.ShowDialog();
             }
 
+            public override void Salvar()
+            {
+                Teste testeSelecionado = ObterTesteSelecionado();
+
+                if (testeSelecionado == null)
+                {
+                    MessageBox.Show("Selecione um teste primeiro!", "Gerar PDF do teste", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                TelaPdfForm telaEscolha = new TelaPdfForm(testeSelecionado);
+                telaEscolha.Text = $"Gerar PDF do {testeSelecionado.Titulo}";
+
+                telaEscolha.ShowDialog();
+            }
+
             private Teste ObterTesteSelecionado()
             {
                 int id = tabelaTeste.ObterIdSelecionado();
 
                 return repositorioTeste.SelecionarPorId(id);
             }
+
 
             private void CarregarTestes()
             {

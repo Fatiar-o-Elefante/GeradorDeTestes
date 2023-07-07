@@ -39,6 +39,7 @@ namespace GeradorDeTestes.WinForms.Compartilhado
         public abstract void Excluir();
 
         public virtual void Visualizar(){}
+
         public virtual void Duplicar(){}
 
         public virtual void Salvar(){}
