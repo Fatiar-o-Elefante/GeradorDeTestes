@@ -130,34 +130,40 @@
             // btnInserir
             // 
             btnInserir.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnInserir.Enabled = false;
             btnInserir.Image = (Image)resources.GetObject("btnInserir.Image");
             btnInserir.ImageTransparentColor = Color.Transparent;
             btnInserir.Name = "btnInserir";
             btnInserir.Padding = new Padding(7);
             btnInserir.Size = new Size(46, 46);
             btnInserir.Text = "toolStripButton1";
+            btnInserir.ToolTipText = "\r\n";
             btnInserir.Click += btnInserir_Click_1;
             // 
             // btnEditar
             // 
             btnEditar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnEditar.Enabled = false;
             btnEditar.Image = (Image)resources.GetObject("btnEditar.Image");
             btnEditar.ImageTransparentColor = Color.Transparent;
             btnEditar.Name = "btnEditar";
             btnEditar.Padding = new Padding(7);
             btnEditar.Size = new Size(46, 46);
             btnEditar.Text = "toolStripButton3";
+            btnEditar.ToolTipText = "\r\n";
             btnEditar.Click += btnEditar_Click_1;
             // 
             // btnExcluir
             // 
             btnExcluir.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnExcluir.Enabled = false;
             btnExcluir.Image = (Image)resources.GetObject("btnExcluir.Image");
             btnExcluir.ImageTransparentColor = Color.Transparent;
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Padding = new Padding(7);
             btnExcluir.Size = new Size(46, 46);
             btnExcluir.Text = "toolStripButton2";
+            btnExcluir.ToolTipText = "\r\n";
             btnExcluir.Click += btnExcluir_Click;
             // 
             // toolStripSeparator1
@@ -169,12 +175,14 @@
             // btnDuplicar
             // 
             btnDuplicar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnDuplicar.Enabled = false;
             btnDuplicar.Image = (Image)resources.GetObject("btnDuplicar.Image");
             btnDuplicar.ImageTransparentColor = Color.Transparent;
             btnDuplicar.Name = "btnDuplicar";
             btnDuplicar.Padding = new Padding(7);
             btnDuplicar.Size = new Size(46, 46);
             btnDuplicar.Text = "toolStripButton4";
+            btnDuplicar.ToolTipText = "\r\n";
             btnDuplicar.Click += btnDuplicar_Click_1;
             // 
             // toolStripSeparator3
@@ -186,12 +194,14 @@
             // btnVisualizar
             // 
             btnVisualizar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnVisualizar.Enabled = false;
             btnVisualizar.Image = (Image)resources.GetObject("btnVisualizar.Image");
             btnVisualizar.ImageTransparentColor = Color.Transparent;
             btnVisualizar.Name = "btnVisualizar";
             btnVisualizar.Padding = new Padding(7);
             btnVisualizar.Size = new Size(46, 46);
             btnVisualizar.Text = "toolStripButton4";
+            btnVisualizar.ToolTipText = "\r\n";
             btnVisualizar.Click += btnVisualizar_Click_1;
             // 
             // toolStripSeparator2
@@ -203,12 +213,14 @@
             // btnSalvar
             // 
             btnSalvar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnSalvar.Enabled = false;
             btnSalvar.Image = (Image)resources.GetObject("btnSalvar.Image");
             btnSalvar.ImageTransparentColor = Color.Transparent;
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Padding = new Padding(7);
             btnSalvar.Size = new Size(46, 46);
             btnSalvar.Text = "toolStripButton4";
+            btnSalvar.ToolTipText = "\r\n";
             btnSalvar.Click += btnSalvar_Click_1;
             // 
             // toolStripSeparator4

@@ -111,7 +111,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                 .Except(ObterAlternativasMarcadas()).ToList();
         }
 
-        private void ValidarErros(Questao questao)
+        public void ValidarErros(Questao questao)
         {
             if (questao == null) return;
 

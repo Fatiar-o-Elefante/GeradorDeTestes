@@ -1,5 +1,6 @@
 ﻿using GeradorDeTestes.Dominio.ModuloDisciplina;
 using GeradorDeTestes.Dominio.ModuloMateria;
+using GeradorDeTestes.Dominio.ModuloTestes;
 using GeradorDeTestes.WinForms.Compartilhado;
 using GeradorDeTestes.WinForms.ModuloQuestoes;
 using System.Drawing.Drawing2D;
@@ -24,6 +25,8 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
 
         public override string ToolTipExcluir => "Excluir Matéria";
 
+        public override bool VisualizarHabilitado => false;
+
         public override void Inserir()
         {
             TelaMateriaForm telaMateriaForm = new TelaMateriaForm(repositorioDisciplina.SelecionarTodos(), repositorioMateria.SelecionarTodos());
@@ -46,6 +49,15 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
 
             Materia materiaSelecionada = ObterMateriaSelecionada();
 
+            if (materiaSelecionada == null)
+            {
+                MessageBox.Show($"Selecione uma matéria primeiro!",
+                    "Edição de Matérias",
+                    MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+                return;
+            }
+
             telaMateriaForm.ConfigurarTela(materiaSelecionada);
 
             DialogResult opcaoEscolhida = telaMateriaForm.ShowDialog();
@@ -64,6 +76,15 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
         public override void Excluir()
         {
             Materia materiaSelecionada = ObterMateriaSelecionada();
+
+            if (materiaSelecionada == null)
+            {
+                MessageBox.Show($"Selecione uma matéria primeiro!",
+                    "Exclusão de Matérias",
+                    MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+                return;
+            }
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a matéria {materiaSelecionada.Nome}?", "Exclusão de Matérias",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);

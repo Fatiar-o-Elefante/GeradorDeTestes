@@ -65,6 +65,15 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             Questao questaoSelecionada = ObterQuestaoSelecionada();
 
+            if (questaoSelecionada == null)
+            {
+                MessageBox.Show($"Selecione uma questão primeiro!",
+                    "Edição de Questões",
+                    MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+                return;
+            }
+
             telaQuestaoForm.ConfigurarTela(questaoSelecionada);
 
             DialogResult opcaoEscolhida = telaQuestaoForm.ShowDialog();
@@ -104,6 +113,15 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
         public override void Excluir()
         {
             Questao questaoSelecionada = ObterQuestaoSelecionada();
+
+            if (questaoSelecionada == null)
+            {
+                MessageBox.Show($"Selecione uma questão primeiro!",
+                    "Exclusão de Questões",
+                    MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+                return;
+            }
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão {questaoSelecionada.id}?", "Exclusão de Matérias",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
