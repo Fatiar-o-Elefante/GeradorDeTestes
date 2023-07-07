@@ -108,26 +108,7 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             }
 
             CarregarDisciplina();
-        }
-
-        public override void Visualizar()
-        {
-            Disciplina disciplina = ObterDisciplinaSelecionada();
-
-            TelaVisualizarMateriaForm telaListagem = new TelaVisualizarMateriaForm();
-
-            if (disciplina == null)
-            {
-                ApresentarMensagem("Selecione uma disciplina primeiro!", "Listagem de disciplina");
-                return;
-            }
-
-            telaListagem.CarregarLabel(disciplina);
-
-            telaListagem.CarregarLista(disciplina.ListMaterias);
-
-            telaListagem.ShowDialog();
-        }
+        }        
 
         private Disciplina ObterDisciplinaSelecionada()
         {

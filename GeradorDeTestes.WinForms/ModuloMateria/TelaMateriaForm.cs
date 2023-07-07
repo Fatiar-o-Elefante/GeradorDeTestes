@@ -83,7 +83,7 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
 
             foreach (Materia d in materias)
             {
-                if (materia.Nome.ToLower() == d.Nome.ToLower() && txtId.Text == "0")
+                if (materia.Nome.ToLower() == d.Nome.ToLower())
                 {
                     TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
 
