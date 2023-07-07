@@ -26,11 +26,11 @@ namespace GeradorDeTestes.WinForms.Compartilhado
 
         public virtual bool ExcluirHabilitado { get { return true; } }
 
-        public virtual bool VisualizarHabilitado { get { return true; } }
+        public virtual bool VisualizarHabilitado { get { return false; } }
 
-        public virtual bool DuplicarHabilitado { get { return true; } }
+        public virtual bool DuplicarHabilitado { get { return false; } }
 
-        public virtual bool SalvarHabilitado { get { return true; } }
+        public virtual bool SalvarHabilitado { get { return false; } }
 
         public abstract void Inserir();
 
@@ -38,20 +38,10 @@ namespace GeradorDeTestes.WinForms.Compartilhado
 
         public abstract void Excluir();
 
-        public virtual void Visualizar()
-        {
+        public virtual void Visualizar(){}
+        public virtual void Duplicar(){}
 
-        }
-
-        public virtual void Duplicar()
-        {
-
-        }
-
-        public virtual void Salvar()
-        {
-
-        }
+        public virtual void Salvar(){}
 
         public abstract void ApresentarMensagem(string mensagem, string titulo);
 

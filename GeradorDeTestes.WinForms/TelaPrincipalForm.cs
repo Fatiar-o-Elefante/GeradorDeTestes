@@ -115,7 +115,7 @@ namespace GeradorDeTestes.WinForms
 
         private void btnDuplicar_Click_1(object sender, EventArgs e)
         {
-            //controlador.Duplicar();
+            controlador.Duplicar();
         }
 
         private void btnVisualizar_Click_1(object sender, EventArgs e)
@@ -125,7 +125,7 @@ namespace GeradorDeTestes.WinForms
 
         private void btnSalvar_Click_1(object sender, EventArgs e)
         {
-            //controlador.Salvar();
+            controlador.Salvar();
         }
 
         private void materiaMenuItem_Click_1(object sender, EventArgs e)

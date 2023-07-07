@@ -101,6 +101,7 @@
             // 
             // cbDisciplina
             // 
+            cbDisciplina.DropDownStyle = ComboBoxStyle.DropDownList;
             cbDisciplina.FormattingEnabled = true;
             cbDisciplina.Location = new Point(76, 71);
             cbDisciplina.Name = "cbDisciplina";
@@ -150,6 +151,7 @@
             // 
             // cbMateria
             // 
+            cbMateria.DropDownStyle = ComboBoxStyle.DropDownList;
             cbMateria.FormattingEnabled = true;
             cbMateria.Location = new Point(76, 113);
             cbMateria.Name = "cbMateria";
@@ -194,6 +196,7 @@
             btnSortear.TabIndex = 0;
             btnSortear.Text = "Sortear";
             btnSortear.UseVisualStyleBackColor = true;
+            btnSortear.Click += btnSortear_Click;
             // 
             // TelaTesteForm
             // 

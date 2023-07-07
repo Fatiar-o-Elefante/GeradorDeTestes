@@ -46,7 +46,7 @@
             btnVisualizar = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             btnSalvar = new ToolStripButton();
-            toolStripSeparator4 = new ToolStripSeparator();
+            toolStripSeparator5 = new ToolStripSeparator();
             lblTipoCadastro = new ToolStripLabel();
             panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
@@ -120,7 +120,7 @@
             // 
             barraFerramentas.BackColor = Color.White;
             barraFerramentas.ImageScalingSize = new Size(28, 28);
-            barraFerramentas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator1, btnDuplicar, toolStripSeparator3, btnVisualizar, toolStripSeparator2, btnSalvar, toolStripSeparator4, lblTipoCadastro });
+            barraFerramentas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator1, btnDuplicar, toolStripSeparator3, btnVisualizar, toolStripSeparator2, btnSalvar, toolStripSeparator5, lblTipoCadastro });
             barraFerramentas.Location = new Point(0, 34);
             barraFerramentas.Name = "barraFerramentas";
             barraFerramentas.Size = new Size(624, 49);
@@ -223,11 +223,11 @@
             btnSalvar.ToolTipText = "\r\n";
             btnSalvar.Click += btnSalvar_Click_1;
             // 
-            // toolStripSeparator4
+            // toolStripSeparator5
             // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Padding = new Padding(7);
-            toolStripSeparator4.Size = new Size(6, 49);
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Padding = new Padding(7);
+            toolStripSeparator5.Size = new Size(6, 49);
             // 
             // lblTipoCadastro
             // 
@@ -307,8 +307,8 @@
         private ToolStripStatusLabel lblStatus;
         private ToolStripButton btnDuplicar;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripSeparator toolStripSeparator4;
         private ToolStripButton btnSalvar;
         private ToolStripSeparator toolStripSeparator2;
+        private ToolStripSeparator toolStripSeparator5;
     }
 }

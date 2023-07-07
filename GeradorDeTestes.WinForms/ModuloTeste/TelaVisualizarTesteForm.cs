@@ -18,7 +18,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
             foreach (Questao questao in questoes)
             {
-                listBoxQuestoes.Items.Add("  ★ " + questao);
+                listBoxQuestoes.Items.Add(" * " + questao);
             }
         }
 

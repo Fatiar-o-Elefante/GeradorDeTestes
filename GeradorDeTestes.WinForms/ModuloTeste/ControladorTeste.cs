@@ -36,6 +36,10 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
             public override string ToolTipDuplicar => "Duplicar Teste";
 
+            public override bool EditarHabilitado => false;
+            public override bool DuplicarHabilitado => true;
+            public override bool VisualizarHabilitado => true;
+            public override bool SalvarHabilitado => true;
             public override void Inserir()
             {
                 TelaTesteForm telaTestes = new TelaTesteForm(repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(),
@@ -52,36 +56,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                 CarregarTestes();
             }
 
-
-            public override void Editar()
-            {
-                Teste testeSelecionado = ObterTesteSelecionado();
-
-                if (testeSelecionado == null)
-                {
-                    MessageBox.Show("Selecione um teste primeiro", "Edição de Testes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                    return;
-                }
-
-                TelaTesteForm telaTestes = new TelaTesteForm(repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(),
-                    repositorioQuestao.SelecionarTodos(), repositorioTeste.SelecionarTodos());
-
-                telaTestes.Text = "Editar teste existente";
-
-                telaTestes.ConfigurarTela(testeSelecionado);
-
-                DialogResult opcaoEscolhida = telaTestes.ShowDialog();
-
-                if (opcaoEscolhida == DialogResult.OK)
-                {
-                    Teste teste = telaTestes.ObterTeste();
-
-                    repositorioTeste.Editar(teste.id, teste);
-                }
-
-                CarregarTestes();
-            }
+            public override void Editar(){}
 
             public override void Excluir()
             {
@@ -102,6 +77,32 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                 if (opcaoEscolhida == DialogResult.OK)
                 {
                     repositorioTeste.Excluir(teste);
+                }
+
+                CarregarTestes();
+            }
+
+            public override void Duplicar()
+            {
+                Teste testeSelecionado = ObterTesteSelecionado();
+
+                if (testeSelecionado == null)
+                {
+                    MessageBox.Show("Selecione um teste primeiro!", "Duplicar teste", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                TelaTesteForm telaTeste = new TelaTesteForm(repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(), repositorioQuestao.SelecionarTodos(), repositorioTeste.SelecionarTodos());
+                telaTeste.Text = "Duplicar teste existente";
+
+                telaTeste.ConfigurarTela(testeSelecionado);
+
+                DialogResult opcaoEscolhida = telaTeste.ShowDialog();
+
+                if (opcaoEscolhida == DialogResult.OK)
+                {
+                    Teste teste = telaTeste.ObterTeste();
+                    repositorioTeste.Inserir(teste);
                 }
 
                 CarregarTestes();
@@ -132,7 +133,6 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
                 return repositorioTeste.SelecionarPorId(id);
             }
-
 
             private void CarregarTestes()
             {
