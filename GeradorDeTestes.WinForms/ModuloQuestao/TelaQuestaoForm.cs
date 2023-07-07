@@ -8,6 +8,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
     public partial class TelaQuestaoForm : Form
     {
         private Questao questao;
+        private int contadorAlternativa;
         List<Questao> questoes;
 
         public TelaQuestaoForm(List<Materia> materias, List<Questao> questoes)
@@ -134,6 +135,12 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                 }
             }
         }
+        private char ObterLetraAlternativa()
+        {
+            int letraAscii = 65 + contadorAlternativa;
+
+            return (char)letraAscii;
+        }
 
         private void btnAdicionar_Click_1(object sender, EventArgs e)
         {
@@ -145,7 +152,12 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                 return;
             }
 
+            alternativa.Resposta = $"({ObterLetraAlternativa()}) {txtResposta.Text}";
+
+            contadorAlternativa++;
+
             chListAlternativas.Items.Add(alternativa);
+            txtResposta.Text = string.Empty;
         }
 
         private void btnRemover_Click_1(object sender, EventArgs e)
