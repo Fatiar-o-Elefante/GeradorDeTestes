@@ -136,7 +136,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                 if (opcaoEscolhida == DialogResult.OK)
                 {
                     Teste teste = telaTeste.ObterTeste();
-                    repositorioTeste.Inserir(teste);
+                    repositorioTeste.Inserir(teste, telaTeste.ObterQuestoesSorteadas());
                 }
 
                 CarregarTestes();
@@ -152,7 +152,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                     return;
                 }
 
-                TelaPdfForm telaEscolha = new TelaPdfForm(testeSelecionado);
+                TelaPdfForm telaEscolha = new TelaPdfForm(testeSelecionado, repositorioQuestao);
                 telaEscolha.Text = $"Gerar PDF do {testeSelecionado.Titulo}";
 
                 telaEscolha.ShowDialog();

@@ -133,7 +133,7 @@
             btnAdicionar.TabIndex = 15;
             btnAdicionar.Text = "Adicionar";
             btnAdicionar.UseVisualStyleBackColor = true;
-            btnAdicionar.Click += btnAdicionar_Click_1;
+            btnAdicionar.Click += btnAdicionar_Click;
             // 
             // groupBox1
             // 

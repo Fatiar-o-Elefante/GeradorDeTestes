@@ -6,6 +6,8 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
 {
     public class RepositorioQuestaoEmSql : RepositorioEmSqlBase<Questao, MapeadorQuestao>, IRepositorioQuestao
     {
+        #region query
+
         protected override string sqlInserir => @"INSERT INTO[DBO].[TBQUESTAO]
                                                     (
                                                        [MATERIA_ID]
@@ -25,7 +27,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
                                                    [MATERIA_ID] = @MATERIA_ID
                                                   ,[ENUNCIADO] = @ENUNCIADO
                                                   ,[RESPOSTA] = @RESPOSTACERTA
-                                             WHERE [ID] = @ID;";
+                                               WHERE [ID] = @ID;";
 
         protected override string sqlExcluir => @"DELETE FROM [TBQUESTAO]
 	                                                WHERE 
@@ -65,61 +67,64 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
                                                     WHERE 
                                                         Q.[ID] = @ID";
 
-        private string sqlAdicionarAlternativa =>
-            @"INSERT INTO [TBAlternativa]
-                (
-                   [LETRA]
-                   ,[QUESTAO_ID]
-                   ,[RESPOSTA]
-                   ,[CORRETA]
-                )
-            VALUES
-                (
-                   @LETRA
-                   ,@QUESTAO_ID
-                   ,@RESPOSTA
-                   ,@CORRETA
-                )";
+        private string sqlAdicionarAlternativa => @"INSERT INTO [TBAlternativa]
+                                                        (
+                                                           [LETRA]
+                                                           ,[QUESTAO_ID]
+                                                           ,[RESPOSTA]
+                                                           ,[CORRETA]
+                                                        )
+                                                    VALUES
+                                                        (
+                                                           @LETRA
+                                                           ,@QUESTAO_ID
+                                                           ,@RESPOSTA
+                                                           ,@CORRETA
+                                                        )";
 
-        private string sqlCarregarAlternativas =>
-            @"SELECT 
-                A.ID            ALTERNATIVA_ID, 
-                A.LETRA         ALTERNATIVA_LETRA, 
-                A.QUESTAO_ID    QUESTAO_ID,
-                A.RESPOSTA      ALTERNATIVA_RESPOSTA,
-                A.CORRETA       ALTERNATIVA_CORRETA,
+        private string sqlCarregarAlternativas => @"SELECT 
+                                                        A.ID            ALTERNATIVA_ID
+                                                       ,A.LETRA         ALTERNATIVA_LETRA
+                                                       ,A.QUESTAO_ID    QUESTAO_ID
+                                                       ,A.RESPOSTA      ALTERNATIVA_RESPOSTA
+                                                       ,A.CORRETA       ALTERNATIVA_CORRETA
+                                                       
+                                                       ,Q.MATERIA_ID    MATERIA_ID
+                                                       ,Q.ENUNCIADO     QUESTAO_ENUNCIADO
+                                                       ,Q.RESPOSTA      QUESTAO_RESPOSTA
+                                                       
+                                                       ,M.NOME           MATERIA_NOME
+                                                       ,M.DISCIPLINA_ID  DISCIPLINA_ID
+                                                       ,M.SERIE          MATERIA_SERIE
 
-                Q.MATERIA_ID    MATERIA_ID,
-                Q.ENUNCIADO     QUESTAO_ENUNCIADO,
-                Q.RESPOSTA      QUESTAO_RESPOSTA,
+                                                       ,D.NOME           DISCIPLINA_NOME
+                                                    FROM 
+                                                        TBALTERNATIVA A
 
-                M.NOME           MATERIA_NOME,
-                M.DISCIPLINA_ID  DISCIPLINA_ID,
-                M.SERIE          MATERIA_SERIE,
+                                                        INNER JOIN TBQUESTAO Q
 
-                D.NOME           DISCIPLINA_NOME
-            FROM 
-                TBALTERNATIVA A
+                                                            ON Q.ID = A.QUESTAO_ID
 
-                INNER JOIN TBQUESTAO Q
+                                                        INNER JOIN TBMATERIA M
 
-                    ON Q.ID = A.QUESTAO_ID
+                                                            ON Q.MATERIA_ID = M.ID
 
-                INNER JOIN TBMATERIA M
+                                                        INNER JOIN TBDISCIPLINA D
 
-                    ON Q.MATERIA_ID = M.ID
+                                                            ON M.DISCIPLINA_ID = D.ID
+                                                    WHERE 
 
-                INNER JOIN TBDISCIPLINA D
+                                                        A.QUESTAO_ID = @QUESTAO_ID AND Q.MATERIA_ID = @MATERIA_ID AND M.DISCIPLINA_ID = @DISCIPLINA_ID";
 
-                    ON M.DISCIPLINA_ID = D.ID
-            WHERE 
+        private const string sqlRemoverAlternativas = @"DELETE FROM [TBALTERNATIVA]
+                                                          WHERE
+                                                        [QUESTAO_ID] = @QUESTAO_ID";
 
-                A.QUESTAO_ID = @QUESTAO_ID AND Q.MATERIA_ID = @MATERIA_ID AND M.DISCIPLINA_ID = @DISCIPLINA_ID";
+        private const string sqlRemoverQuestoes = @"DELETE FROM [TBQUESTAO_TBTESTE]
+                                                          WHERE
+                                                        [QUESTAO_ID] = @QUESTAO_ID";
 
-        private const string sqlRemoverAlternativas =
-            @"DELETE FROM [TBALTERNATIVA]
-                WHERE
-                    [QUESTAO_ID] = @QUESTAO_ID";
+        #endregion
 
         public void Inserir(Questao questao, List<Alternativa> alternativasAdicionadas)
         {
@@ -140,10 +145,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
 
             foreach (Alternativa alternativa in alternativasAdicionadas)
             {
-                if (questao.ListAlternativas.Contains(alternativa) == false)
-                {
-                    AdicionarAlternativa(alternativa, questao);
-                }
+                AdicionarAlternativa(alternativa, questao);
             }
         }
 
@@ -175,6 +177,8 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
         public override void Excluir(Questao questao)
         {
             RemoverAlternativa(questao);
+
+            RemoverQuestoes(questao);
 
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
@@ -265,7 +269,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
             conexaoComBanco.Close();
         }
 
-        private void CarregarAlternativas(Questao questao)
+        public void CarregarAlternativas(Questao questao)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
             conexaoComBanco.Open();
@@ -296,6 +300,20 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloQuestoes
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
             SqlCommand comandoExclusao = new SqlCommand(sqlRemoverAlternativas, conexaoComBanco);
+
+            comandoExclusao.Parameters.AddWithValue("QUESTAO_ID", questao.id);
+
+            conexaoComBanco.Open();
+            comandoExclusao.ExecuteNonQuery();
+
+            conexaoComBanco.Close();
+        }
+
+        private void RemoverQuestoes(Questao questao)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoExclusao = new SqlCommand(sqlRemoverQuestoes, conexaoComBanco);
 
             comandoExclusao.Parameters.AddWithValue("QUESTAO_ID", questao.id);
 
