@@ -81,10 +81,9 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
 
             if (disciplina == null)
             {
-                ApresentarMensagem("Selecione um disciplina primeiro!", "Exclusão de Disciplinas");
+                ApresentarMensagem("Selecione uma disciplina primeiro!", "Exclusão de Disciplinas");
                 return;
             }
-
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o disciplina {disciplina.Nome}?", "Exclusão de Disciplinas",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);

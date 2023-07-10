@@ -1,4 +1,5 @@
 ﻿using GeradorDeTestes.Dominio.ModuloDisciplina;
+using GeradorDeTestes.Dominio.ModuloTestes;
 using GeradorDeTestes.Infra.Dados.Sql.Compartilhado;
 
 namespace GeradorDeTestes.Infra.Dados.Sql.ModuloDisciplina
@@ -39,6 +40,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloDisciplina
 	                                                    [TBDISCIPLINA] 
                                                     WHERE 
                                                         [ID] = @ID";
+
 
         public Disciplina SelecionarPorId(int id)
         {

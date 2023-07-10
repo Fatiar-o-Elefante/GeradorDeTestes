@@ -1,4 +1,6 @@
-﻿namespace GeradorDeTestes.Dominio.Compartilhado
+﻿using GeradorDeTestes.Dominio.ModuloTestes;
+
+namespace GeradorDeTestes.Dominio.Compartilhado
 {
     public interface IRepositorioBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
     {

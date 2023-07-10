@@ -1,5 +1,6 @@
 ﻿using GeradorDeTestes.Dominio.ModuloMateria;
 using GeradorDeTestes.Dominio.ModuloQuestoes;
+using GeradorDeTestes.Dominio.ModuloTestes;
 using GeradorDeTestes.WinForms.Compartilhado;
 
 namespace GeradorDeTestes.WinForms.ModuloQuestoes
@@ -9,10 +10,12 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
         private IRepositorioQuestao repositorioQuestao;
         private TabelaQuestaoControl tabelaQuestao;
         private IRepositorioMateria repositorioMateria;
+        private IRepositorioTeste repositorioTeste;
 
 
-        public ControladorQuestao(IRepositorioQuestao repositorioQuestao, IRepositorioMateria repositorioMateria)
+        public ControladorQuestao(IRepositorioQuestao repositorioQuestao, IRepositorioMateria repositorioMateria, IRepositorioTeste repositorioTeste)
         {
+            this.repositorioTeste = repositorioTeste;
             this.repositorioQuestao = repositorioQuestao;
             this.repositorioMateria = repositorioMateria;
         }
@@ -96,7 +99,15 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repositorioQuestao.Excluir(questaoSelecionada);
+                try
+                {
+                    repositorioQuestao.Excluir(questaoSelecionada, repositorioTeste.SelecionarTodos());
+                }
+                catch (Microsoft.Data.SqlClient.SqlException)
+                {
+                    MessageBox.Show($"Questão está em um teste! Não pode ser Excluída", "Exclusão de Questões",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
 
             CarregarQuestoes();
