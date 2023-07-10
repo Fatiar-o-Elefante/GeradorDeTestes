@@ -44,19 +44,19 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             {
                 Questao questao = telaQuestaoForm.ObterQuestao();
 
-                if (questao == null)
-                {
-                    TelaPrincipalForm.Instancia.AtualizarRodape("É necessário adicionar uma alternativa");
-                    telaQuestaoForm.ShowDialog();
-                    return;
-                }
+                //if (questao == null)
+                //{
+                //    TelaPrincipalForm.Instancia.AtualizarRodape("É necessário adicionar uma alternativa");
+                //    telaQuestaoForm.ShowDialog();
+                //    return;
+                //}
 
-                if (questao.RespostaCerta == "erro")
-                {
-                    TelaPrincipalForm.Instancia.AtualizarRodape("É necessário marcar uma alternativa");
-                    telaQuestaoForm.ShowDialog();
-                    return;
-                }
+                //if (questao.RespostaCerta == "erro")
+                //{
+                //    TelaPrincipalForm.Instancia.AtualizarRodape("É necessário marcar uma alternativa");
+                //    telaQuestaoForm.ShowDialog();
+                //    return;
+                //}
 
                 repositorioQuestao.Inserir(questao, telaQuestaoForm.ObterAlternativas());
             }
@@ -83,7 +83,6 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                 List<Alternativa> alternativasDesmarcadas = telaQuestaoForm.ObterAlternativasDesmarcadas();
 
                 repositorioQuestao.Editar(questao.id, questao, alternativasMarcadas);
-
             }
 
             CarregarQuestoes();
@@ -95,8 +94,6 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão {questaoSelecionada.id}?", "Exclusão de Matérias",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            repositorioQuestao.Excluir(questaoSelecionada);
 
             if (opcaoEscolhida == DialogResult.OK)
             {

@@ -40,10 +40,8 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             string respostaCerta;
 
             if (chListAlternativas.Items.Count == 0)
-                return null;
+                respostaCerta = null;
 
-            if (chListAlternativas.CheckedItems.Count == 0)
-                respostaCerta = "erro";
             else
                 respostaCerta = chListAlternativas.CheckedItems[0].ToString()!;
 
@@ -143,8 +141,6 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         private void ValidarErros(Questao questao)
         {
-            if (questao == null) return;
-
             string[] erros = questao.Validar();
 
             if (erros.Length > 0)

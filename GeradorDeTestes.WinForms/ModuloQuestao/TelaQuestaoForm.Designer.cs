@@ -31,7 +31,6 @@
             txtId = new TextBox();
             label1 = new Label();
             btnGravar = new Button();
-            btnCancelar = new Button();
             label2 = new Label();
             cbMateria = new ComboBox();
             label3 = new Label();
@@ -42,6 +41,7 @@
             groupBox1 = new GroupBox();
             btnRemover = new Button();
             chListAlternativas = new CheckedListBox();
+            btnCancelar = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,24 +68,13 @@
             // 
             btnGravar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnGravar.DialogResult = DialogResult.OK;
-            btnGravar.Location = new Point(121, 353);
+            btnGravar.Location = new Point(158, 357);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(87, 37);
             btnGravar.TabIndex = 6;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
             btnGravar.Click += btnGravar_Click;
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnCancelar.DialogResult = DialogResult.Cancel;
-            btnCancelar.Location = new Point(214, 353);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(87, 37);
-            btnCancelar.TabIndex = 5;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -176,11 +165,23 @@
             chListAlternativas.TabIndex = 0;
             chListAlternativas.SelectedIndexChanged += chListAlternativas_SelectedIndexChanged;
             // 
+            // btnCancelar
+            // 
+            btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCancelar.DialogResult = DialogResult.Cancel;
+            btnCancelar.Location = new Point(251, 357);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(87, 37);
+            btnCancelar.TabIndex = 17;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            // 
             // TelaQuestaoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(313, 402);
+            ClientSize = new Size(350, 406);
+            Controls.Add(btnCancelar);
             Controls.Add(groupBox1);
             Controls.Add(btnAdicionar);
             Controls.Add(txtResposta);
@@ -192,7 +193,6 @@
             Controls.Add(txtId);
             Controls.Add(label1);
             Controls.Add(btnGravar);
-            Controls.Add(btnCancelar);
             Name = "TelaQuestaoForm";
             Text = "Cadastro de Questoes";
             groupBox1.ResumeLayout(false);
@@ -205,7 +205,6 @@
         private TextBox txtId;
         private Label label1;
         private Button btnGravar;
-        private Button btnCancelar;
         private Label label2;
         private ComboBox cbMateria;
         private Label label3;
@@ -216,5 +215,6 @@
         private GroupBox groupBox1;
         private Button btnRemover;
         private CheckedListBox chListAlternativas;
+        private Button btnCancelar;
     }
 }
