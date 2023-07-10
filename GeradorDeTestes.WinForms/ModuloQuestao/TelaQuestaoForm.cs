@@ -37,16 +37,22 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             int id = int.Parse(txtId.Text);
             string enunciado = txtEnunciado.Text;
             Materia materia = (Materia)cbMateria.SelectedItem;
-            string respostaCerta;
+            string respostaCerta = null;
+
+            questao = new Questao(id, materia, enunciado);
 
             if (chListAlternativas.Items.Count == 0)
-                respostaCerta = null;
+                return null;
+
+            if (chListAlternativas.CheckedItems.Count == 0)
+                return null;
 
             else
-                respostaCerta = chListAlternativas.CheckedItems[0].ToString()!;
+            {
+                respostaCerta = chListAlternativas.CheckedItems[0].ToString();
+            }
 
-
-            questao = new Questao(id, materia, enunciado, respostaCerta);
+            questao.RespostaCerta = respostaCerta;
 
             foreach (Alternativa alternativa in ObterAlternativasDesmarcadas())
             {
@@ -134,7 +140,15 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
+
             Questao questao = ObterQuestao();
+
+            if(questao == null)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape("Nenhuma alternativa foi marcada");
+                DialogResult = DialogResult.None;
+                return;
+            }
 
             ValidarErros(questao);
         }
