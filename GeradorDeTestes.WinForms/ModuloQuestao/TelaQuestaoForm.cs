@@ -41,8 +41,6 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             questao = new Questao(id, materia, enunciado);
 
-            Alternativa alternativaCorreta = ObterAlternativaMarcada();
-
             if (chListAlternativas.Items.Count == 0)
                 return null;
 
@@ -61,6 +59,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                 questao.AdicionarAlternativa(alternativa);
             }
 
+            Alternativa alternativaCorreta = ObterAlternativaMarcada();
 
             alternativaCorreta.Correta = true;
             questao.AdicionarAlternativa(alternativaCorreta);
@@ -111,7 +110,10 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
         public Alternativa ObterAlternativaMarcada()
         {
-            return chListAlternativas.Items.Cast<Alternativa>().FirstOrDefault(x => x.Correta == true);
+            List<Alternativa> listaCerta = new List<Alternativa>();
+            listaCerta = chListAlternativas.CheckedItems.Cast<Alternativa>().ToList();
+            Alternativa alt = listaCerta[0];
+            return alt;
         }
 
         public List<Alternativa> ObterAlternativasDesmarcadas()
