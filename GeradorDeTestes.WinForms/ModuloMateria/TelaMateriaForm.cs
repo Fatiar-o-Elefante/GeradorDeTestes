@@ -83,16 +83,16 @@ namespace GeradorDeTestes.WinForms.ModuloMateria
 
             foreach (Materia d in materias)
             {
-                if (materia.Nome.ToLower() == d.Nome.ToLower())
+                if (materia.Nome.ToUpper() == d.Nome.ToUpper() && materia.id != d.id)
                 {
-                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
+                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome já esta em uso");
 
                     DialogResult = DialogResult.None;
                 }
             }
         }
 
-        private void btnGravar_Click_1(object sender, EventArgs e)
+        private void btnGravar_Click(object sender, EventArgs e)
         {
             Materia materia = ObterMateria();
 

@@ -6,6 +6,6 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
     {
         void Inserir(Questao questao, List<Alternativa> alternativasAdicionadas);
 
-        void Editar(int id, Questao questao, List<Alternativa> alternativasMarcadas, List<Alternativa> alternativasDesmarcadas);
+        void Editar(int id, Questao questao, List<Alternativa> alternativas);
     }
 }

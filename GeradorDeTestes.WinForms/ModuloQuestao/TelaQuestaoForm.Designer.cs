@@ -165,7 +165,7 @@
             btnRemover.TabIndex = 17;
             btnRemover.Text = "Remover";
             btnRemover.UseVisualStyleBackColor = true;
-            btnRemover.Click += btnRemover_Click_1;
+            btnRemover.Click += btnRemover_Click;
             // 
             // chListAlternativas
             // 

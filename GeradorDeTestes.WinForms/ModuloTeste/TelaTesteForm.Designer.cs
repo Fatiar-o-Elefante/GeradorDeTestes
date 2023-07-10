@@ -107,6 +107,7 @@
             cbDisciplina.Name = "cbDisciplina";
             cbDisciplina.Size = new Size(134, 23);
             cbDisciplina.TabIndex = 14;
+            cbDisciplina.SelectedIndexChanged += cbDisciplina_SelectedIndexChanged;
             // 
             // label3
             // 

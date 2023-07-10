@@ -33,6 +33,7 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             txtId.Text = disciplinaSelecionada.id.ToString();
             txtNome.Text = disciplinaSelecionada.Nome;
         }
+
         private void ValidarErros(Disciplina disciplina)
         {
             string[] erros = disciplina.Validar();
@@ -46,9 +47,9 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
 
             foreach (Disciplina d in disciplinas)
             {
-                if (disciplina.Nome == d.Nome && txtId.Text == "0")
+                if (disciplina.Nome.ToUpper() == d.Nome.ToUpper() && disciplina.id != d.id)
                 {
-                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
+                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome já esta em uso");
 
                     DialogResult = DialogResult.None;
                 }

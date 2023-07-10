@@ -10,23 +10,29 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
         private TabelaQuestaoControl tabelaQuestao;
         private IRepositorioMateria repositorioMateria;
 
+
         public ControladorQuestao(IRepositorioQuestao repositorioQuestao, IRepositorioMateria repositorioMateria)
         {
             this.repositorioQuestao = repositorioQuestao;
             this.repositorioMateria = repositorioMateria;
         }
 
-        public override string ToolTipInserir => "Inserir Questão";
+        public override string ToolTipInserir => "Enserir Nova Questão";
 
-        public override string ToolTipEditar => "Editar Questão";
+        public override string ToolTipEditar => "Editar Questão Existente";
 
         public override string ToolTipExcluir => "Excluir Questão";
+
+        public override bool DuplicarHabilitado => false;
+
+        public override bool SalvarHabilitado => false;
+
+        public override bool VisualizarHabilitado => false;
 
         public override void ApresentarMensagem(string mensagem, string titulo)
         {
             MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-
 
         public override void Inserir()
         {
@@ -52,27 +58,17 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                     return;
                 }
 
-                repositorioQuestao.Inserir(questao, questao.ListAlternativas);
+                repositorioQuestao.Inserir(questao, telaQuestaoForm.ObterAlternativas());
             }
 
             CarregarQuestoes();
         }
-
 
         public override void Editar()
         {
             TelaQuestaoForm telaQuestaoForm = new TelaQuestaoForm(repositorioMateria.SelecionarTodos(), repositorioQuestao.SelecionarTodos());
 
             Questao questaoSelecionada = ObterQuestaoSelecionada();
-
-            if (questaoSelecionada == null)
-            {
-                MessageBox.Show($"Selecione uma questão primeiro!",
-                    "Edição de Questões",
-                    MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
-                return;
-            }
 
             telaQuestaoForm.ConfigurarTela(questaoSelecionada);
 
@@ -82,60 +78,29 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             {
                 Questao questao = telaQuestaoForm.ObterQuestao();
 
-                List<Alternativa> alternativasMarcadas = telaQuestaoForm.ObterAlternativasMarcadas();
+                List<Alternativa> alternativasMarcadas = telaQuestaoForm.ObterAlternativas();
 
                 List<Alternativa> alternativasDesmarcadas = telaQuestaoForm.ObterAlternativasDesmarcadas();
 
-                foreach (Questao q in repositorioQuestao.SelecionarTodos())
-                {
-                    if (questao.Enunciado == q.Enunciado)
-                    {
-                        TelaPrincipalForm.Instancia.AtualizarRodape("O nome já está em uso");
-                        telaQuestaoForm.ShowDialog();
-                        return;
-                    }
-                }
-
-                repositorioQuestao.Editar(questao.id, questao, alternativasMarcadas, alternativasDesmarcadas);
+                repositorioQuestao.Editar(questao.id, questao, alternativasMarcadas);
 
             }
 
             CarregarQuestoes();
         }
 
-        private Questao ObterQuestaoSelecionada()
-        {
-            int id = tabelaQuestao.ObterIdSelecionado();
-
-            return repositorioQuestao.SelecionarPorId(id);
-        }
-
         public override void Excluir()
         {
             Questao questaoSelecionada = ObterQuestaoSelecionada();
 
-            if (questaoSelecionada == null)
-            {
-                MessageBox.Show($"Selecione uma questão primeiro!",
-                    "Exclusão de Questões",
-                    MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
-                return;
-            }
-
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão {questaoSelecionada.id}?", "Exclusão de Matérias",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
+            repositorioQuestao.Excluir(questaoSelecionada);
+
             if (opcaoEscolhida == DialogResult.OK)
             {
-                try
-                {
-                    repositorioQuestao.Excluir(questaoSelecionada);
-                }
-                catch (Microsoft.Data.SqlClient.SqlException)
-                {
-                    ApresentarMensagem("Não é possível excluir a questão pois ela pertence a um teste!", "Exclusão de Questões");
-                }
+                repositorioQuestao.Excluir(questaoSelecionada);
             }
 
             CarregarQuestoes();
@@ -163,5 +128,13 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             tabelaQuestao.AtualizarRegistros(questoes);
         }
+
+        private Questao ObterQuestaoSelecionada()
+        {
+            int id = tabelaQuestao.ObterIdSelecionado();
+
+            return repositorioQuestao.SelecionarPorId(id);
+        }
+
     }
 }

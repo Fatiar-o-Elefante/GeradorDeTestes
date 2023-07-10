@@ -31,5 +31,14 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloMateria
 
             return new Materia(id, nome, disciplina, serie);
         }
+
+        public Materia ConverterRegistro2(SqlDataReader leitorRegistros)
+        {
+            int id = Convert.ToInt32(leitorRegistros["ID"]);
+            string nome = Convert.ToString(leitorRegistros["NOME"]);
+            int serie = Convert.ToInt32(leitorRegistros["SERIE"]);
+
+            return new Materia(id, nome, serie);
+        }
     }
 }

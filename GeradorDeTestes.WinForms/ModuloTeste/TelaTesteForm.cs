@@ -10,8 +10,9 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
     {
         private List<Questao> questoes;
         private List<Teste> testes;
+        private IRepositorioMateria repositorioMateria;
 
-        public TelaTesteForm(List<Materia> materias, List<Disciplina> disciplinas, List<Questao> questoes, List<Teste> testes)
+        public TelaTesteForm(List<Materia> materias, List<Disciplina> disciplinas, List<Questao> questoes, List<Teste> testes, IRepositorioMateria repositorioMateria)
         {
             this.questoes = questoes;
             this.testes = testes;
@@ -22,6 +23,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             ConfigurarComboBoxDisciplina(disciplinas);
             ConfigurarComboBoxMateria(materias);
             this.testes = testes;
+            this.repositorioMateria = repositorioMateria;
         }
 
         public Teste ObterTeste()
@@ -70,22 +72,6 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             return listBoxSorteadas.Items.Cast<Questao>().ToList();
         }
 
-        private List<Questao> SortearQuestoes(List<Questao> questoesDisponiveis, int quantidade)
-        {
-            List<Questao> questoesSorteadas = new List<Questao>();
-
-            Random random = new Random();
-
-            for (int i = 0; i < quantidade; i++)
-            {
-                int index = random.Next(questoesDisponiveis.Count);
-                questoesSorteadas.Add(questoesDisponiveis[index]);
-                questoesDisponiveis.RemoveAt(index);
-            }
-
-            return questoesSorteadas;
-        }
-
         private void btnGravar_Click(object sender, EventArgs e)
         {
             Teste teste = ObterTeste();
@@ -108,9 +94,9 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
             foreach (Teste t in testes)
             {
-                if (teste.Titulo == t.Titulo && txtId.Text == "0")
+                if (teste.Titulo.ToUpper() == t.Titulo.ToUpper() && teste.id != t.id)
                 {
-                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
+                    TelaPrincipalForm.Instancia.AtualizarRodape("O título já esta em uso");
 
                     DialogResult = DialogResult.None;
                 }
@@ -119,7 +105,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
         private void btnSortear_Click(object sender, EventArgs e)
         {
-            int quantidade = int.Parse(numQtdQuestoes.Text);
+            int quantidade = (int)numQtdQuestoes.Value;
 
             if (cbMateria.SelectedItem != null)
             {
@@ -134,13 +120,58 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                         questoesSorteadas.ForEach(q => listBoxSorteadas.Items.Add(q));
                     }
                     else
+                    {
                         MessageBox.Show("Não há questões suficientes para a quantidade solicitada!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
                 else
+                {
                     MessageBox.Show("Digite uma quantidade válida!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
             else
+            {
                 MessageBox.Show("Selecione uma matéria!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            btnSortear.Enabled = false;
+        }
+
+        private List<Questao> SortearQuestoes(List<Questao> questoesDisponiveis, int quantidade)
+        {
+            List<Questao> questoesSorteadas = new List<Questao>();
+            Random random = new Random();
+            Materia materia = (Materia)cbMateria.SelectedItem;
+
+            List<Questao> questoesFiltradas = questoesDisponiveis.FindAll(x => x.Materia.id == materia.id);
+
+            for (int i = 0; i < quantidade; i++)
+            {
+                if (questoesFiltradas.Count == 0)
+                    break;
+
+                int index = random.Next(questoesFiltradas.Count);
+                questoesSorteadas.Add(questoesFiltradas[index]);
+                questoesFiltradas.RemoveAt(index);
+            }
+
+            return questoesSorteadas;
+        }
+
+        private void cbDisciplina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbMateria.Items.Clear();
+
+            if (cbDisciplina.SelectedItem != null)
+            {
+                Disciplina disciplinaSelecionada = (Disciplina)cbDisciplina.SelectedItem;
+
+                List<Materia> materiasRelacionadas = repositorioMateria.CarregarMateriasDisciplina(disciplinaSelecionada);
+
+                cbMateria.Items.AddRange(materiasRelacionadas.ToArray());
+            }
         }
     }
 }

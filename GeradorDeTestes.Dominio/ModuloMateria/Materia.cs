@@ -9,6 +9,13 @@ namespace GeradorDeTestes.Dominio.ModuloMateria
         public Disciplina Disciplina { get; set; }
         public int Serie { get; set; }
 
+        public Materia(int id, string nome, int serie)
+        {
+            this.id = id;
+            Nome = nome;
+            Serie = serie;
+        }
+
         public Materia(int id, string nome, Disciplina disciplina, int serie)
         {
             this.id = id;
@@ -19,10 +26,9 @@ namespace GeradorDeTestes.Dominio.ModuloMateria
 
         public override void AtualizarInformacoes(Materia registroAtualizado)
         {
-            this.id += registroAtualizado.id;
-            this.Nome = registroAtualizado.Nome;
-            this.Disciplina = registroAtualizado.Disciplina;
-            this.Serie = registroAtualizado.Serie;
+            Nome = registroAtualizado.Nome;
+            Disciplina = registroAtualizado.Disciplina;
+            Serie = registroAtualizado.Serie;
         }
 
         public override string[] Validar()
@@ -30,19 +36,20 @@ namespace GeradorDeTestes.Dominio.ModuloMateria
             List<string> erros = new List<string>();
 
             if (string.IsNullOrEmpty(Nome))
-                erros.Add("O campo 'Nome' é obrigatório");
+                erros.Add("O campo 'nome' é obrigatorio");
 
-            if (Nome.Length < 4)
-                erros.Add("O campo 'Nome' deve conter no mínimo 4 caracteres");
+            if (Nome.Length <= 5)
+                erros.Add("O campo nome deve conter mais de 5 caracteres");
 
             if (Disciplina == null)
-                erros.Add("O campo 'Disciplina' é obrigatório");
+                erros.Add("O campo  'disciplina' é obrigatorio");
 
             if (Serie == 0)
-                erros.Add("O campo 'Serie' é obrigatório");
+                erros.Add("O campo 'série' é obrigatório");
 
             return erros.ToArray();
         }
+
         public override string ToString()
         {
             return Nome;

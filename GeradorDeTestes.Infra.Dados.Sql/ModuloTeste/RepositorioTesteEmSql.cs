@@ -94,34 +94,6 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloTestes
                    ,@Teste_Id
                 )";
 
-        //private const string sqlCarregarQuestoes =
-        //    @"SELECT 
-        //        Q.ID            QUESTAO_ID, 
-        //        Q.MATERIA_ID    QUESTAO_MATERIA_ID, 
-        //        Q.ENUNCIADO     QUESTAO_ENUNCIADO,
-        //        Q.RESPOSTA      QUESTAO_RESPOSTA,
-                
-        //        M.ID             MATERIA_ID,
-        //        M.NOME           MATERIA_NOME,
-        //        M.DISCIPLINA_ID  DISCIPLINA_ID,
-        //        M.SERIE          MATERIA_SERIE,
-
-        //        D.ID             DISCIPLINA_ID,
-        //        D.NOME           DISCIPLINA_NOME
-        //    FROM 
-        //        [TBQUESTOES] Q
-
-        //        INNER JOIN TBMATERIA M
-
-        //            ON Q.MATERIA_ID = M.ID
-
-        //        INNER JOIN TBDISCIPLINA D
-
-        //            ON M.DISCIPLINA_ID = D.ID
-        //    WHERE 
-
-        //        Q.MATERIA_ID = @MATERIA_ID AND M.DISCIPLINA_ID = @DISCIPLINA_ID";
-
         private const string sqlRemoverQuestoes =
             @"DELETE FROM TBQUESTAO_TBTESTE
                 WHERE TESTE_ID = @TESTE_ID AND QUESTAO_ID = @QUESTAO_ID";

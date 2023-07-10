@@ -8,8 +8,8 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
     public partial class TelaQuestaoForm : Form
     {
         private Questao questao;
-        private int contadorAlternativa;
         List<Questao> questoes;
+        private int alternativaCount = 0;
 
         public TelaQuestaoForm(List<Materia> materias, List<Questao> questoes)
         {
@@ -55,7 +55,7 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
                 questao.AdicionarAlternativa(alternativa);
             }
 
-            foreach (Alternativa alternativaMarcada in ObterAlternativasMarcadas())
+            foreach (Alternativa alternativaMarcada in ObterAlternativas())
             {
                 Alternativa alternativa = new Alternativa(questao, respostaCerta, true);
                 alternativa.Correta = true;
@@ -101,18 +101,47 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
             }
         }
 
-        public List<Alternativa> ObterAlternativasMarcadas()
+        private void chListAlternativas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            return chListAlternativas.CheckedItems.Cast<Alternativa>().ToList();
+            int index = chListAlternativas.SelectedIndex;
+
+            int count = chListAlternativas.Items.Count;
+
+            for (int x = 0; x < count; x++)
+            {
+                if (index != x)
+                {
+                    chListAlternativas.SetItemCheckState(x, CheckState.Unchecked);
+                }
+            }
+        }
+
+        public List<Alternativa> ObterAlternativas()
+        {
+            return chListAlternativas.Items.Cast<Alternativa>().ToList();
         }
 
         public List<Alternativa> ObterAlternativasDesmarcadas()
         {
             return chListAlternativas.Items.Cast<Alternativa>()
-                .Except(ObterAlternativasMarcadas()).ToList();
+                .Except(ObterAlternativas()).ToList();
         }
 
-        public void ValidarErros(Questao questao)
+        private char ObterLetraAlternativa()
+        {
+            int letraAscii = 65 + alternativaCount;
+
+            return (char)letraAscii;
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            Questao questao = ObterQuestao();
+
+            ValidarErros(questao);
+        }
+
+        private void ValidarErros(Questao questao)
         {
             if (questao == null) return;
 
@@ -127,19 +156,13 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             foreach (Questao q in questoes)
             {
-                if (questao.Enunciado.ToLower() == q.Enunciado.ToLower() && txtId.Text == "0")
+                if (questao.Enunciado.ToUpper() == q.Enunciado.ToUpper() && questao.id != q.id)
                 {
-                    TelaPrincipalForm.Instancia.AtualizarRodape("O nome ja esta em uso");
+                    TelaPrincipalForm.Instancia.AtualizarRodape("O Enunciado já esta em uso");
 
                     DialogResult = DialogResult.None;
                 }
             }
-        }
-        private char ObterLetraAlternativa()
-        {
-            int letraAscii = 65 + contadorAlternativa;
-
-            return (char)letraAscii;
         }
 
         private void btnAdicionar_Click_1(object sender, EventArgs e)
@@ -154,37 +177,15 @@ namespace GeradorDeTestes.WinForms.ModuloQuestoes
 
             alternativa.Resposta = $"({ObterLetraAlternativa()}) {txtResposta.Text}";
 
-            contadorAlternativa++;
+            alternativaCount++;
 
             chListAlternativas.Items.Add(alternativa);
             txtResposta.Text = string.Empty;
         }
 
-        private void btnRemover_Click_1(object sender, EventArgs e)
+        private void btnRemover_Click(object sender, EventArgs e)
         {
             chListAlternativas.Items.Remove(chListAlternativas.SelectedItem);
-        }
-
-        private void btnGravar_Click(object sender, EventArgs e)
-        {
-            Questao questao = ObterQuestao();
-
-            ValidarErros(questao);
-        }
-
-        private void chListAlternativas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = chListAlternativas.SelectedIndex;
-
-            int count = chListAlternativas.Items.Count;
-
-            for (int x = 0; x < count; x++)
-            {
-                if (index != x)
-                {
-                    chListAlternativas.SetItemCheckState(x, CheckState.Unchecked);
-                }
-            }
         }
     }
 }

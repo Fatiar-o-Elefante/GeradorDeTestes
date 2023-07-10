@@ -16,13 +16,23 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             this.repositorioDisciplina = repositorioDisciplina;
         }
 
-        public override string ToolTipInserir => "Inserir Disciplina";
+        public override string ToolTipInserir => "Inserir nova Disciplina";
 
-        public override string ToolTipEditar => "Editar Disciplina";
+        public override string ToolTipEditar => "Editar Disciplina existente";
 
-        public override string ToolTipExcluir => "Excluir Disciplina";
+        public override string ToolTipExcluir => "Excluir Disciplina existente";
 
         public override string ToolTipVisualizar => "Visualizar Matérias da Disciplina";
+
+        public override bool DuplicarHabilitado => false;
+
+        public override bool SalvarHabilitado => false;
+
+
+        public override void ApresentarMensagem(string mensagem, string titulo)
+        {
+            MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
 
         public override void Inserir()
         {
@@ -59,16 +69,6 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             {
                 Disciplina disciplina = telaDisciplina.ObterDisciplina();
 
-                foreach (Disciplina d in repositorioDisciplina.SelecionarTodos())
-                {
-                    if (disciplina.Nome == d.Nome)
-                    {
-                        TelaPrincipalForm.Instancia.AtualizarRodape("O nome já está em uso");
-                        telaDisciplina.ShowDialog();
-                        return;
-                    }
-                }
-
                 repositorioDisciplina.Editar(disciplina.id, disciplina);
 
                 CarregarDisciplina();
@@ -91,12 +91,6 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                if (disciplina.ListMaterias.Count > 0)
-                {
-                    MessageBox.Show("Exclusão inválida, disciplina possui materiais");
-                    return;
-                }
-
                 try
                 {
                     repositorioDisciplina.Excluir(disciplina);
@@ -108,13 +102,18 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             }
 
             CarregarDisciplina();
-        }        
+        }
 
         private Disciplina ObterDisciplinaSelecionada()
         {
             int id = tabelaDisciplina.ObterIdSelecionado();
 
             return repositorioDisciplina.SelecionarPorId(id);
+        }
+
+        public override string ObterTipoCadastro()
+        {
+            return "Cadastro de Disciplina";
         }
 
         private void CarregarDisciplina()
@@ -132,16 +131,6 @@ namespace GeradorDeTestes.WinForms.ModuloDisciplina
             CarregarDisciplina();
 
             return tabelaDisciplina;
-        }
-
-        public override string ObterTipoCadastro()
-        {
-            return "Cadastro de Disciplina";
-        }
-
-        public override void ApresentarMensagem(string mensagem, string titulo)
-        {
-            MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
     }

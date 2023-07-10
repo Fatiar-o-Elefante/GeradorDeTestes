@@ -34,14 +34,11 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
             if (Materia == null)
                 erros.Add("O campo 'Matéria' é obrigatorio");
 
-            if (string.IsNullOrEmpty(Enunciado))
-                erros.Add("O campo 'Enunciado' é obrigatório");
-
             if (Enunciado.Length <= 5)
                 erros.Add("O campo enunciado deve conter mais de 5 caracteres");
 
             if (string.IsNullOrEmpty(RespostaCerta))
-                erros.Add("O campo 'Resposta' é obrigatorio");
+                erros.Add("O campo  'Resposta' é obrigatorio");
 
             if (ListAlternativas.Count < 2)
                 erros.Add("É necessário adicionar no mínimo 2 alternativas");
@@ -57,22 +54,17 @@ namespace GeradorDeTestes.Dominio.ModuloQuestoes
             ListAlternativas.Add(alternativa);
         }
 
-        public bool Contem(Alternativa alternativaParaAdicionar)
+        public bool Existe(Alternativa alternativaParaAdicionar)
         {
-            if (ListAlternativas.Contains(alternativaParaAdicionar))
+            if (ListAlternativas.Exists(x => x.id == alternativaParaAdicionar.id))
                 return true;
 
             return false;
         }
 
-        public void RemoverAlternativa(Alternativa alternaticaParaRemover)
-        {
-            ListAlternativas.Remove(alternaticaParaRemover);
-        }
-
         public override string ToString()
         {
-            return Enunciado.ToString();
+            return Enunciado;
         }
     }
 }
