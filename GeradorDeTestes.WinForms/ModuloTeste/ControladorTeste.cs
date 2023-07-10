@@ -39,6 +39,12 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
             public override bool EditarHabilitado => false;
 
+            public override bool DuplicarHabilitado => true;
+
+            public override bool SalvarHabilitado => true;
+
+            public override bool VisualizarHabilitado => true;
+
 
             public override void ApresentarMensagem(string mensagem, string titulo)
             {
@@ -47,7 +53,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
             public override void Inserir()
             {
-                TelaTesteForm telaTestes = new TelaTesteForm(repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(),
+                TelaTesteForm telaTestes = new TelaTesteForm(duplicar: false, repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(),
                     repositorioQuestao.SelecionarTodos(), repositorioTeste.SelecionarTodos(), repositorioMateria);
 
                 DialogResult opcaoEscolhida = telaTestes.ShowDialog();
@@ -63,32 +69,6 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
             public override void Editar()
             {
-                Teste testeSelecionado = ObterTesteSelecionado();
-
-                if (testeSelecionado == null)
-                {
-                    MessageBox.Show("Selecione um teste primeiro", "Edição de Testes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                    return;
-                }
-
-                TelaTesteForm telaTestes = new TelaTesteForm(repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(),
-                    repositorioQuestao.SelecionarTodos(), repositorioTeste.SelecionarTodos(), repositorioMateria);
-
-                telaTestes.Text = "Editar teste existente";
-
-                telaTestes.ConfigurarTela(testeSelecionado);
-
-                DialogResult opcaoEscolhida = telaTestes.ShowDialog();
-
-                if (opcaoEscolhida == DialogResult.OK)
-                {
-                    Teste teste = telaTestes.ObterTeste();
-
-                    repositorioTeste.Editar(teste.id, teste);
-                }
-
-                CarregarTestes();
             }
 
             public override void Excluir()
@@ -144,7 +124,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                     return;
                 }
 
-                TelaTesteForm telaTeste = new TelaTesteForm(repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(),
+                TelaTesteForm telaTeste = new TelaTesteForm(duplicar: true, repositorioMateria.SelecionarTodos(), repositorioDisciplina.SelecionarTodos(),
                     repositorioQuestao.SelecionarTodos(), repositorioTeste.SelecionarTodos(), repositorioMateria);
 
                 telaTeste.Text = "Duplicar teste existente";

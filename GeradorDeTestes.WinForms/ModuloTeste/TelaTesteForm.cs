@@ -11,9 +11,11 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
         private List<Questao> questoes;
         private List<Teste> testes;
         private IRepositorioMateria repositorioMateria;
+        private bool duplicar;
 
-        public TelaTesteForm(List<Materia> materias, List<Disciplina> disciplinas, List<Questao> questoes, List<Teste> testes, IRepositorioMateria repositorioMateria)
+        public TelaTesteForm(bool duplicar, List<Materia> materias, List<Disciplina> disciplinas, List<Questao> questoes, List<Teste> testes, IRepositorioMateria repositorioMateria)
         {
+            this.duplicar = duplicar;
             this.questoes = questoes;
             this.testes = testes;
 
@@ -77,6 +79,8 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             Teste teste = ObterTeste();
 
             ValidarErros(teste);
+
+            ValidarDuplicacao(teste, duplicar);
         }
 
         private void ValidarErros(Teste teste)
@@ -99,6 +103,22 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                     TelaPrincipalForm.Instancia.AtualizarRodape("O título já esta em uso");
 
                     DialogResult = DialogResult.None;
+                }
+            }
+        }
+
+        public void ValidarDuplicacao(Teste teste, bool duplicar)
+        {
+            if (duplicar == true)
+            {
+                foreach (Teste t in testes)
+                {
+                    if (teste.Titulo.ToUpper() == t.Titulo.ToUpper())
+                    {
+                        TelaPrincipalForm.Instancia.AtualizarRodape("O título já esta em uso");
+
+                        DialogResult = DialogResult.None;
+                    }
                 }
             }
         }
