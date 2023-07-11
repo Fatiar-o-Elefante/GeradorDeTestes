@@ -136,7 +136,7 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                 questoesParaSortear = questoes.FindAll(q => q.Materia.Disciplina.id == disciplina.id);
             }
 
-            if (questoes.Count < quantidade)
+            if (questoesParaSortear.Count < quantidade)
             {
                 MessageBox.Show("Não há questões suficientes para a quantidade solicitada!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
