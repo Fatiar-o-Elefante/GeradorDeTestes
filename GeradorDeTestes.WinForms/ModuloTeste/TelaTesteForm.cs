@@ -85,7 +85,6 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             ValidarDuplicacao(teste, duplicar);
         }
 
-
         public void ValidarDuplicacao(Teste teste, bool duplicar)
         {
             if (duplicar == true)
