@@ -98,6 +98,7 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloTestes
             @"DELETE FROM TBQUESTAO_TBTESTE
                 WHERE TESTE_ID = @TESTE_ID AND QUESTAO_ID = @QUESTAO_ID";
 
+
         private const string sqlCarregasQuestoesTeste = @"SELECT 
                 Q.ID                QUESTAO_ID, 
                 Q.MATERIA_ID        QUESTAO_MATERIA_ID, 
