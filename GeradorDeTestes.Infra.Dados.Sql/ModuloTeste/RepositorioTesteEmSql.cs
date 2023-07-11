@@ -9,78 +9,78 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloTestes
     public class RepositorioTesteEmSql : RepositorioEmSqlBase<Teste, MapeadorTeste>, IRepositorioTeste
     {
         protected override string sqlInserir => @"INSERT INTO[DBO].[TBTESTE]
-                                                    (
-                                                        [TITULO]
-                                                       ,[DISCIPLINA_ID]
-                                                       ,[MATERIA_ID]
-                                                       ,[QUANTIDADEQUESTOES]
-                                                       ,[PROVARECUPERACAO]
-                                                    )
-                                                 VALUES
-                                                    (
-                                                        @TITULO
-                                                       ,@DISCIPLINA_ID
-                                                       ,@MATERIA_ID
-                                                       ,@QUANTIDADEQUESTOES
-                                                       ,@PROVARECUPERACAO
-                                                    );
-                                                 SELECT SCOPE_IDENTITY();";
+                    (
+                        [TITULO]
+                       ,[DISCIPLINA_ID]
+                       ,[MATERIA_ID]
+                       ,[QUANTIDADEQUESTOES]
+                       ,[PROVARECUPERACAO]
+                    )
+                 VALUES
+                    (
+                        @TITULO
+                       ,@DISCIPLINA_ID
+                       ,@MATERIA_ID
+                       ,@QUANTIDADEQUESTOES
+                       ,@PROVARECUPERACAO
+                    );
+                 SELECT SCOPE_IDENTITY();";
 
         protected override string sqlEditar => @"UPDATE[TBTESTE]
-                                               SET
-                                                   [TITULO] = @TITULO
-                                                   ,[DISCIPLINA_ID] = @DISCIPLINA_ID
-                                                   ,[MATERIA_ID] = @MATERIA_ID
-                                                   ,[QUANTIDADEQUESTOES] = @QUANTIDADEQUESTOES
-                                                   ,[PROVARECUPERACAO] = @PROVARECUPERACAO
-                                             WHERE [ID] = @ID;";
+                 SET
+                       [TITULO] = @TITULO
+                       ,[DISCIPLINA_ID] = @DISCIPLINA_ID
+                       ,[MATERIA_ID] = @MATERIA_ID
+                       ,[QUANTIDADEQUESTOES] = @QUANTIDADEQUESTOES
+                       ,[PROVARECUPERACAO] = @PROVARECUPERACAO
+                 WHERE [ID] = @ID;";
 
         protected override string sqlExcluir => @"DELETE FROM [TBTESTE]
 	                                                WHERE 
 		                                                [ID] = @ID";
 
         protected override string sqlSelecionarTodos => @"SELECT 
-	                                                        T.[ID]                  TESTE_ID 
-                                                           ,T.[TITULO]              TESTE_TITULO
-	                                                       ,T.[DISCIPLINA_ID]       TESTE_DISCIPLINA_ID
-	                                                       ,T.[MATERIA_ID]          TESTE_MATERIA_ID
-                                                           ,T.[QUANTIDADEQUESTOES]  TESTE_QUANTIDADEQUESTOES
-                                                           ,T.[PROVARECUPERACAO]    TESTE_PROVARECUPERACAO
-                                                           ,M.[ID]                  MATERIA_ID
-                                                           ,M.[NOME]                MATERIA_NOME
-                                                           ,M.[SERIE]               MATERIA_SERIE
-                                                           ,M.[DISCIPLINA_ID]       DISCIPLINA_ID
-                                                           ,D.[ID]                  DISCIPLINA_ID
-                                                           ,D.[NOME]                DISCIPLINA_NOME
+                T.[ID]                        AS TESTE_ID,
+                T.[TITULO]                    AS TESTE_TITULO,
+                T.[QUANTIDADEQUESTOES]        AS TESTE_QUANTIDADEQUESTOES,
+                T.[PROVARECUPERACAO]          AS TESTE_PROVARECUPERACAO,
+                T.[DISCIPLINA_ID]             AS TESTE_DISCIPLINA_ID,
+                T.[MATERIA_ID]                AS TESTE_MATERIA_ID,
+                D.[ID]                        AS DISCIPLINA_ID,
+                D.[NOME]                      AS DISCIPLINA_NOME,
+                M.[ID]                        AS MATERIA_ID,
+                M.[NOME]                      AS MATERIA_NOME,
+                M.[SERIE]                     AS MATERIA_SERIE,
+                M.[DISCIPLINA_ID]             AS MATERIA_DISCIPLINA_ID
+            FROM 
+                [TBTESTE] AS T
+            LEFT JOIN [TBDISCIPLINA] AS D
+                ON T.DISCIPLINA_ID = D.ID
+            LEFT JOIN [TBMATERIA] AS M
+                ON T.MATERIA_ID = M.ID";
 
-                                                        FROM 
-	                                                        [TBTESTE] AS T
-                                                        INNER JOIN [TBMATERIA] AS M
-                                                                ON T.[MATERIA_ID] = M.ID
-                                                        INNER JOIN [TBDISCIPLINA] AS D
-                                                                ON M.[DISCIPLINA_ID] = D.ID";
-
-        protected override string sqlSelecionarPorId => @"SELECT 
-	                                                        T.[ID]                  TESTE_ID 
-                                                           ,T.[TITULO]              TESTE_TITULO
-	                                                       ,T.[DISCIPLINA_ID]       TESTE_DISCIPLINA_ID
-	                                                       ,T.[MATERIA_ID]          TESTE_MATERIA_ID
-                                                           ,T.[QUANTIDADEQUESTOES]  TESTE_QUANTIDADEQUESTOES
-                                                           ,T.[PROVARECUPERACAO]    TESTE_PROVARECUPERACAO
-                                                           ,M.[ID]                  MATERIA_ID
-                                                           ,M.[NOME]                MATERIA_NOME
-                                                           ,M.[SERIE]               MATERIA_SERIE
-                                                           ,M.[DISCIPLINA_ID]       DISCIPLINA_ID
-                                                           ,D.[ID]                  DISCIPLINA_ID
-                                                           ,D.[NOME]                DISCIPLINA_NOME
-                                                    FROM 
-	                                                        [TBTESTE] AS T
-                                                        INNER JOIN [TBMATERIA] AS M
-                                                                ON T.[MATERIA_ID] = M.ID
-                                                        INNER JOIN [TBDISCIPLINA] AS D
-                                                                ON M.[DISCIPLINA_ID] = D.ID
-                                                    WHERE 
-                                                        T.[ID] = @ID";
+        protected override string sqlSelecionarPorId =>
+            @"SELECT 
+                T.[ID]                        TESTE_ID
+               ,T.[TITULO]                    TESTE_TITULO
+               ,T.[QUANTIDADEQUESTOES]    TESTE_QUANTIDADEQUESTOES
+               ,T.[PROVARECUPERACAO]      TESTE_PROVARECUPERACAO
+               ,T.[DISCIPLINA_ID]             TESTE_DISCIPLINA_ID
+               ,T.[MATERIA_ID]                TESTE_MATERIA_ID
+               ,D.[ID]                        DISCIPLINA_ID
+               ,D.[NOME]                      DISCIPLINA_NOME
+               ,M.[ID]                        MATERIA_ID
+               ,M.[NOME]                      MATERIA_NOME
+               ,M.[SERIE]                     MATERIA_SERIE
+               ,M.[DISCIPLINA_ID]             DISCIPLINA_ID
+            FROM 
+                [TBTESTE] AS T
+            LEFT JOIN [TBDISCIPLINA] AS D
+                ON T.DISCIPLINA_ID = D.ID
+            LEFT JOIN [TBMATERIA] AS M
+                ON T.MATERIA_ID = M.ID
+            WHERE 
+                T.[ID] = @ID";
 
 
         private const string sqlAdicionarQuestao =
@@ -112,8 +112,8 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloTestes
                 M.DISCIPLINA_ID     DISCIPLINA_ID,
                 M.SERIE             MATERIA_SERIE,
 
-                D.ID             DISCIPLINA_ID,
-                D.NOME           DISCIPLINA_NOME
+                D.ID                DISCIPLINA_ID,
+                D.NOME              DISCIPLINA_NOME
                 
             FROM 
                 [TBQUESTAO] Q

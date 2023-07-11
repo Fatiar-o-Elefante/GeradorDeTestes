@@ -28,15 +28,23 @@ namespace GeradorDeTestes.Infra.Dados.Sql.ModuloTestes
         public override Teste ConverterRegistro(SqlDataReader leitorRegistros)
         {
             int id = Convert.ToInt32(leitorRegistros["TESTE_ID"]);
-            string titulo = Convert.ToString(leitorRegistros["TESTE_TITULO"]);
-            int quantidadeQuestoes = Convert.ToInt32(leitorRegistros["TESTE_QUANTIDADEQUESTOES"]);
-            bool provaRecuperacao = Convert.ToBoolean(leitorRegistros["TESTE_PROVARECUPERACAO"]);
+
+            string titulo = Convert.ToString(leitorRegistros["TESTE_TITULO"])!;
+
+            int quantidadeDeQuestoes = Convert.ToInt32(leitorRegistros["TESTE_QUANTIDADEQUESTOES"])!;
+            bool provaDeRecuperacao = Convert.ToBoolean(leitorRegistros["TESTE_PROVARECUPERACAO"])!;
 
             Disciplina disciplina = new MapeadorDisciplina().ConverterRegistro(leitorRegistros);
 
-            Materia materia = new MapeadorMateria().ConverterRegistro(leitorRegistros);
+            Materia materia = null;
+            if (leitorRegistros["MATERIA_ID"] != DBNull.Value)
+            {
+                materia = new MapeadorMateria().ConverterRegistro(leitorRegistros);
+            }
 
-            return new Teste(id, titulo, disciplina, materia, quantidadeQuestoes, provaRecuperacao);
+            Teste teste = new Teste(id, titulo, disciplina, materia, quantidadeDeQuestoes, provaDeRecuperacao);
+
+            return teste;
         }
     }
 }

@@ -9,7 +9,9 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
     public partial class TelaTesteForm : Form
     {
         private List<Questao> questoes;
+        public List<Questao> questoesSorteadas { get; set; } = new List<Questao>();
         private List<Teste> testes;
+
         private IRepositorioMateria repositorioMateria;
         private bool duplicar;
 
@@ -83,29 +85,6 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
             ValidarDuplicacao(teste, duplicar);
         }
 
-        private void ValidarErros(Teste teste)
-        {
-            if (teste == null) return;
-
-            string[] erros = teste.Validar();
-
-            if (erros.Length > 0)
-            {
-                TelaPrincipalForm.Instancia.AtualizarRodape(erros[0]);
-
-                DialogResult = DialogResult.None;
-            }
-
-            foreach (Teste t in testes)
-            {
-                if (teste.Titulo.ToUpper() == t.Titulo.ToUpper() && teste.id != t.id)
-                {
-                    TelaPrincipalForm.Instancia.AtualizarRodape("O título já esta em uso");
-
-                    DialogResult = DialogResult.None;
-                }
-            }
-        }
 
         public void ValidarDuplicacao(Teste teste, bool duplicar)
         {
@@ -125,59 +104,55 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
 
         private void btnSortear_Click(object sender, EventArgs e)
         {
-            int quantidade = (int)numQtdQuestoes.Value;
+            listBoxSorteadas.Items.Clear();
+            questoesSorteadas.Clear();
 
-            if (cbMateria.SelectedItem != null)
-            {
-                if (quantidade > 0)
-                {
-                    Materia materiaSelecionada = (Materia)cbMateria.SelectedItem;
+            Materia materia = (Materia)cbMateria.SelectedItem;
+            Disciplina disciplina = (Disciplina)cbDisciplina.SelectedItem;
 
-                    if (questoes.Count >= quantidade)
-                    {
-                        List<Questao> questoesSorteadas = SortearQuestoes(questoes, quantidade);
+            int quantidade = (int)numQtdQuestoes.Value;            
 
-                        questoesSorteadas.ForEach(q => listBoxSorteadas.Items.Add(q));
-                    }
-                    else
-                    {
-                        MessageBox.Show("Não há questões suficientes para a quantidade solicitada!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Digite uma quantidade válida!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
+            if (cbMateria.SelectedItem == null)
             {
                 MessageBox.Show("Selecione uma matéria!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            btnSortear.Enabled = false;
-        }
 
-        private List<Questao> SortearQuestoes(List<Questao> questoesDisponiveis, int quantidade)
-        {
-            List<Questao> questoesSorteadas = new List<Questao>();
-            Random random = new Random();
-            Materia materia = (Materia)cbMateria.SelectedItem;
-
-            List<Questao> questoesFiltradas = questoesDisponiveis.FindAll(x => x.Materia.id == materia.id);
-
-            for (int i = 0; i < quantidade; i++)
+            if (quantidade <= 0)
             {
-                if (questoesFiltradas.Count == 0)
-                    break;
-
-                int index = random.Next(questoesFiltradas.Count);
-                questoesSorteadas.Add(questoesFiltradas[index]);
-                questoesFiltradas.RemoveAt(index);
+                MessageBox.Show("Digite uma quantidade válida!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            return questoesSorteadas;
+            Materia materiaSelecionada = (Materia)cbMateria.SelectedItem;
+
+            List<Questao> questoesParaSortear;
+
+            if (chProvaRecup.Checked == false)
+            {
+                questoesParaSortear = questoes.FindAll(x => x.Materia.id == materia.id);
+            }
+            else
+            {
+                questoesParaSortear = questoes.FindAll(q => q.Materia.Disciplina.id == disciplina.id);
+            }
+
+            if (questoes.Count < quantidade)
+            {
+                MessageBox.Show("Não há questões suficientes para a quantidade solicitada!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Random random = new Random();
+
+            while (questoesSorteadas.Count < quantidade)
+            {
+                int index = random.Next(questoesParaSortear.Count);
+                questoesSorteadas.Add(questoesParaSortear[index]);
+                questoesParaSortear.RemoveAt(index);
+            }
+
+            questoesSorteadas.ForEach(q => listBoxSorteadas.Items.Add(q));
         }
 
         private void cbDisciplina_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,6 +166,34 @@ namespace GeradorDeTestes.WinForms.ModuloTestes
                 List<Materia> materiasRelacionadas = repositorioMateria.CarregarMateriasDisciplina(disciplinaSelecionada);
 
                 cbMateria.Items.AddRange(materiasRelacionadas.ToArray());
+            }
+        }
+
+        private void ValidarErros(Teste teste)
+        {
+            if (teste == null) return;
+
+            string[] erros = teste.Validar();
+
+            if (erros.Length > 0)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape(erros[0]);
+
+                DialogResult = DialogResult.None;
+            }
+
+            if (testes.Contains(teste))
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape("O título já esta em uso");
+
+                DialogResult = DialogResult.None;
+            }
+
+            if (listBoxSorteadas.Items.Count == 0)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape("É necessário sortear questões");
+
+                DialogResult = DialogResult.None;
             }
         }
     }
